@@ -1,10 +1,12 @@
 import { RiMenu3Line } from "react-icons/ri";
 import { RxCross1 } from "react-icons/rx";
 
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import axisTimes from "../assets/axistimes.png";
+import { AuthContext } from "../providers/AuthProvider";
 const Navber = () => {
+  const { user } = useContext(AuthContext);
   const sideMenuRef = useRef();
 
   const openMenu = () => {
@@ -24,29 +26,41 @@ const Navber = () => {
         <div>
           <ul className="lg:flex items-center text-white gap-4 hidden">
             <li>
-              <Link href="/">Home</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <Link href="/shop">All Articles</Link>
+              <Link to="/shop">All Articles</Link>
             </li>
             <li>
-              <Link href="/product">Subscription</Link>
+              <Link to="/product">Subscription</Link>
             </li>
             <li>
-              <Link href="/contact">Dashboard </Link>
+              <Link to="/contact">Dashboard </Link>
             </li>
             <li>
-              <Link href="/blog">My Articles</Link>
+              <Link to="/blog">My Articles</Link>
             </li>
           </ul>
         </div>
         <div className="flex justify-between items-center gap-3 md:gap-5">
-          <button className=" lg:block hidden py-2 px-6 border  hover:bg-black hover:border-black text-white border-white  transition ease-linear duration-200">
-            <Link href="/">Login</Link>
-          </button>
-          <button className="lg:block hidden  py-2 px-8 border hover:bg-transparent bg-black hover:border-white text-white border-black  transition ease-linear duration-200">
-            <Link href="/">Register</Link>
-          </button>
+          {user ? (
+            <Link to="/myProfile">
+              <img
+                className="w-12 h-12 rounded-badge"
+                src={user.photoURL}
+                alt=""
+              />
+            </Link>
+          ) : (
+            <>
+              <button className=" lg:block hidden py-2 px-6 border  hover:bg-black hover:border-black text-white border-white  transition ease-linear duration-200">
+                <Link to="/login">Login</Link>
+              </button>
+              <button className="lg:block hidden  py-2 px-8 border hover:bg-transparent bg-black hover:border-white text-white border-black  transition ease-linear duration-200">
+                <Link to="/register">Register</Link>
+              </button>
+            </>
+          )}
 
           <button onClick={openMenu} className=" text-white lg:hidden">
             <RiMenu3Line className="text-3xl" />
@@ -63,26 +77,26 @@ const Navber = () => {
               <RxCross1 className="text-black text-xl" />
             </div>
             <li>
-              <Link href="/">Home</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <Link href="/shop">All Articles</Link>
+              <Link to="/shop">All Articles</Link>
             </li>
             <li>
-              <Link href="/product">Subscription</Link>
+              <Link to="/product">Subscription</Link>
             </li>
             <li>
-              <Link href="/contact">Dashboard </Link>
+              <Link to="/contact">Dashboard </Link>
             </li>
             <li>
-              <Link href="/blog">My Articles</Link>
+              <Link to="/blog">My Articles</Link>
             </li>
             <li className="flex items-center gap-3 w-full">
               <button className="py-1 px-4 border w-full hover:bg-black hover:text-white border-black text-black transition ease-linear duration-200">
-                <Link href="/">Login</Link>
+                <Link to="/login">Login</Link>
               </button>
               <button className="py-1 px-4 border w-full hover:bg-rose-600 hover:border-rose-600  hover:text-white border-black text-black transition ease-linear duration-200">
-                <Link href="/">Register</Link>
+                <Link to="/register">Register</Link>
               </button>
             </li>
           </ul>
