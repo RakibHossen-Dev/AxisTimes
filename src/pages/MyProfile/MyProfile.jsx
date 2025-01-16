@@ -51,14 +51,16 @@
 
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const MyProfile = () => {
   const { user, logOut } = useContext(AuthContext);
-
+  const navigate = useNavigate();
   const handleLogout = () => {
     logOut()
       .then(() => {
         console.log("Logged out successfully");
+        navigate("/login");
       })
       .catch((error) => {
         console.error("Error logging out:", error);
@@ -66,7 +68,7 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-br from-blue-500 via-purple-500 to-rose-500">
+    <div className="flex justify-center items-center px-3 h-screen bg-gradient-to-br from-blue-500 via-purple-500 to-rose-500">
       <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-sm w-full transform hover:scale-105 transition-transform duration-300">
         {/* Profile Image */}
         <div className="flex justify-center mb-6">

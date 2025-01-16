@@ -29,6 +29,9 @@ const Navber = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
+              <Link to="/shop">Add Articles</Link>
+            </li>
+            <li>
               <Link to="/shop">All Articles</Link>
             </li>
             <li>
@@ -45,11 +48,15 @@ const Navber = () => {
         <div className="flex justify-between items-center gap-3 md:gap-5">
           {user ? (
             <Link to="/myProfile">
-              <img
-                className="w-12 h-12 rounded-badge"
-                src={user.photoURL}
-                alt=""
-              />
+              {user?.photoURL && (
+                <div className="border-2 rounded-badge">
+                  <img
+                    className="w-12 h-12 rounded-badge"
+                    src={user?.photoURL}
+                    alt=""
+                  />
+                </div>
+              )}
             </Link>
           ) : (
             <>
@@ -80,8 +87,12 @@ const Navber = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
+              <Link to="/shop">Add Articles</Link>
+            </li>
+            <li>
               <Link to="/shop">All Articles</Link>
             </li>
+
             <li>
               <Link to="/product">Subscription</Link>
             </li>
