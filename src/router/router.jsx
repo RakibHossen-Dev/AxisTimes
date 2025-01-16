@@ -5,6 +5,11 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import MyProfile from "../pages/MyProfile/MyProfile";
 import AddArticle from "../pages/AddArticle/AddArticle";
+import DashboardLayout from "../layout/DashboardLayout";
+import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import AllArticles from "../pages/Dashboard/AllArticles/AllArticles";
+import AddPublisher from "../pages/Dashboard/AddPublisher/AddPublisher";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +35,28 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        path: "adminHome",
+        element: <AdminHome></AdminHome>,
+      },
+      {
+        path: "allUsers",
+        element: <AllUsers></AllUsers>,
+      },
+      {
+        path: "allArticles",
+        element: <AllArticles></AllArticles>,
+      },
+      {
+        path: "addPublisher",
+        element: <AddPublisher></AddPublisher>,
       },
     ],
   },
