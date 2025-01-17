@@ -2,15 +2,32 @@ import { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Login = () => {
   const { signIn, googleSignIn } = useContext(AuthContext);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
-  const handleGoogleLogin = async () => {
-    await googleSignIn();
-    console.log("Google Login clicked");
-    navigate("/");
+  // const handleGoogleLogin = async () => {
+  //   await googleSignIn();
+  //   console.log("Google Login clicked");
+  //   navigate("/");
+  // };
+
+  const handleGoogleLogin = () => {
+    googleSignIn().then((result) => {
+      const userInfo = {
+        name: result.user?.displayName,
+        email: result.user?.email,
+        photo: result.user?.photoURL,
+      };
+      axiosPublic.post("/users", userInfo).then((res) => {
+        console.log(res);
+      });
+
+      // console.log("Register Successfull");
+    });
   };
 
   const handleLogin = (e) => {

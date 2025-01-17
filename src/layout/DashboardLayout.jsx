@@ -13,7 +13,7 @@ const DashboardLayout = () => {
   };
 
   return (
-    <div className="flex min-h-screen ">
+    <div className="flex flex-col sm:flex-row min-h-screen ">
       {/* Sidebar */}
       <aside
         className={`fixed top-0 left-0 z-40 h-full w-64 bg-gray-50 text-gray-800 transition-transform ease-in-out duration-300 ${
@@ -141,97 +141,6 @@ const DashboardLayout = () => {
               </Link>
             </li>
           </ul>
-
-          {/* <ul className="space-y-6">
-            <li>
-              <Link
-                to="/dashboard/adminHome"
-                className="flex items-center p-2 text-gray-800 rounded-lg  hover:text-white  hover:bg-rose-600 transition-colors ease-in-out duration-200"
-              >
-                <svg
-                  className="w-5 h-5 mr-3"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 7v10m5-5H7"
-                  />
-                </svg>
-                <span>Admin Home</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/dashboard/allUsers"
-                className="flex items-center p-2 text-gray-800 rounded-lg  hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
-              >
-                <svg
-                  className="w-5 h-5 mr-3"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 12h18m-9 9V3"
-                  />
-                </svg>
-                <span>All Users</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/dashboard/allArticles"
-                className="flex items-center p-2 text-gray-800 rounded-lg  hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
-              >
-                <svg
-                  className="w-5 h-5 mr-3"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 12h18m-9 9V3"
-                  />
-                </svg>
-                <span>All Articles </span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/dashboard/addPublisher"
-                className="flex items-center p-2 text-gray-800 rounded-lg  hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
-              >
-                <svg
-                  className="w-5 h-5 mr-3"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 12h18m-9 9V3"
-                  />
-                </svg>
-                <span>Add Publisher</span>
-              </Link>
-            </li>
-          </ul> */}
         </div>
       </aside>
 

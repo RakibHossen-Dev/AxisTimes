@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -15,6 +16,8 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
@@ -30,9 +33,18 @@ const Register = () => {
 
     createUser(data.email, data.password)
       .then((result) => {
-        updateUserProfile(data.name, res.data.data.display_url);
-        navigate("/");
-        console.log(result);
+        updateUserProfile(data.name, res.data.data.display_url).then(() => {
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+            photo: res.data.data.display_url,
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            navigate("/");
+
+            console.log(res);
+          });
+        });
       })
       .catch((err) => console.log(err));
     // console.log(res.data.data.display_url);
@@ -42,8 +54,18 @@ const Register = () => {
 
   const { googleSignIn } = useContext(AuthContext);
   const handleGoogleRegister = () => {
-    googleSignIn();
-    console.log("Register Successfull");
+    googleSignIn().then((result) => {
+      const userInfo = {
+        name: result.user?.displayName,
+        email: result.user?.email,
+        photo: result.user?.photoURL,
+      };
+      axiosPublic.post("/users", userInfo).then((res) => {
+        console.log(res);
+      });
+
+      // console.log("Register Successfull");
+    });
   };
 
   // const handleSubmit = (e) => {
