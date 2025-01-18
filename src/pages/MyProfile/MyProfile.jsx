@@ -52,9 +52,13 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import useAdmin from "../../hooks/useAdmin";
 
 const MyProfile = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
+
+  console.log(isAdmin);
   const navigate = useNavigate();
   const handleLogout = () => {
     logOut()
@@ -90,9 +94,17 @@ const MyProfile = () => {
           <p className="text-gray-600 text-sm mb-4 italic">
             {user?.email || "Your Email"}
           </p>
-          <p className="text-sm font-semibold text-purple-700 bg-purple-100 px-3 py-1 rounded-full inline-block">
-            {user?.role || "Role: User"}
-          </p>
+          {isAdmin ? (
+            <p className="text-sm font-semibold text-purple-700 bg-purple-100 px-3 py-1 rounded-full inline-block">
+              {/* {user?.role || "Role: User"} */}
+              Role: Admin
+            </p>
+          ) : (
+            <p className="text-sm font-semibold text-purple-700 bg-purple-100 px-3 py-1 rounded-full inline-block">
+              {/* {user?.role || "Role: User"} */}
+              Role: User
+            </p>
+          )}
         </div>
 
         {/* Logout Button */}

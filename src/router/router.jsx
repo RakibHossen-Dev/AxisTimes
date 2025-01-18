@@ -10,6 +10,9 @@ import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import AllArticles from "../pages/Dashboard/AllArticles/AllArticles";
 import AddPublisher from "../pages/Dashboard/AddPublisher/AddPublisher";
+import PrivateRoute from "./PrivetRoute";
+import AdminRoute from "./AdminRoute";
+import MyArticles from "../pages/MyArticles/MyArticles";
 
 export const router = createBrowserRouter([
   {
@@ -22,7 +25,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/myProfile",
-        element: <MyProfile></MyProfile>,
+        element: (
+          <PrivateRoute>
+            <MyProfile></MyProfile>,
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/myArticles",
+        element: (
+          <PrivateRoute>
+            <MyArticles></MyArticles>,
+          </PrivateRoute>
+        ),
       },
       {
         path: "/addArticle",
@@ -40,23 +55,44 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>,
+      </PrivateRoute>
+    ),
+
     children: [
       {
         path: "adminHome",
-        element: <AdminHome></AdminHome>,
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>,
+          </AdminRoute>
+        ),
       },
       {
         path: "allUsers",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>,
+          </AdminRoute>
+        ),
       },
       {
         path: "allArticles",
-        element: <AllArticles></AllArticles>,
+        element: (
+          <AdminRoute>
+            <AllArticles></AllArticles>,
+          </AdminRoute>
+        ),
       },
       {
         path: "addPublisher",
-        element: <AddPublisher></AddPublisher>,
+        element: (
+          <AdminRoute>
+            <AddPublisher></AddPublisher>,
+          </AdminRoute>
+        ),
       },
     ],
   },

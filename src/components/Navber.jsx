@@ -41,7 +41,7 @@ const Navber = () => {
               <Link to="/dashboard/adminHome">Dashboard </Link>
             </li>
             <li>
-              <Link to="/blog">My Articles</Link>
+              <Link to="/myArticles">My Articles</Link>
             </li>
           </ul>
         </div>
@@ -100,7 +100,7 @@ const Navber = () => {
               <Link to="/contact">Dashboard </Link>
             </li>
             <li>
-              <Link to="/blog">My Articles</Link>
+              <Link to="/myArticles">My Articles</Link>
             </li>
             <li className="flex items-center gap-3 w-full">
               <button className="py-1 px-4 border w-full hover:bg-black hover:text-white border-black text-black transition ease-linear duration-200">

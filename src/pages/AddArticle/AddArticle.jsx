@@ -1,6 +1,11 @@
 import { useForm } from "react-hook-form";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Select from "react-select";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../providers/AuthProvider";
 const options = [
   { value: "programming", label: "programming" },
   { value: "Business", label: "Business" },
@@ -13,18 +18,66 @@ const options = [
   { value: "Education", label: "Education" },
   { value: "World-News", label: "World-News" },
   { value: "Environment", label: "Environment" },
+  { value: "Climate", label: "Climate" },
 ];
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 const AddArticle = () => {
+  const { user } = useContext(AuthContext);
+  const axiosSecure = useAxiosSecure();
+
+  const { data: publishers = [], refetch } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/publishers");
+      return res.data;
+    },
+  });
+
   const [selectedOption, setSelectedOption] = useState(null);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
+  const onSubmit = async (data) => {
+    const imageFile = { image: data.image[0] };
 
-  const onSubmit = (data) => {
-    console.log(data);
-    alert("Article submitted successfully!");
+    const res = await axios.post(image_hosting_api, imageFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    if (res.data.success) {
+      const articles = {
+        title: data.title,
+        image: res.data.data.display_url,
+        publisher: data.publisher,
+        tag: selectedOption,
+        description: data.description,
+        email: user?.email,
+        status: "pending",
+      };
+
+      const PublisherRes = await axiosSecure.post("/articles", articles);
+      console.log(PublisherRes.data);
+      if (PublisherRes.data.insertedId) {
+        reset();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Addeed New Articles",
+          showConfirmButton: false,
+
+          timer: 1500,
+        });
+      }
+    }
+
+    // console.log("articles", articles);
+    // alert("Article submitted successfully!");
   };
   return (
     <div className="flex justify-center items-center py-10 md:px-0 px-3   bg-gray-100">
@@ -85,15 +138,21 @@ const AddArticle = () => {
             >
               Publisher
             </label>
-            <input
-              type="text"
-              id="publisher"
+            <select
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              name="publisher"
+              id=""
               {...register("publisher", {
                 required: "Publisher name is required",
               })}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="Enter publisher name"
-            />
+            >
+              {publishers.map((publisher) => (
+                <option key={publisher._id} value={publisher.name}>
+                  {publisher.name}
+                </option>
+              ))}
+            </select>
+
             {errors.publisher && (
               <p className="text-red-500 text-sm mt-1">
                 {errors.publisher.message}
@@ -109,18 +168,9 @@ const AddArticle = () => {
             >
               Tags
             </label>
-            {/* <input
-              type="text"
-              id="tags"
-              {...register("tags", { required: "Tags are required" })}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              placeholder="Enter tags (comma separated)"
-            />
 
-            {errors.tags && (
-              <p className="text-red-500 text-sm mt-1">{errors.tags.message}</p>
-            )} */}
             <Select
+              name="tag"
               isMulti
               defaultValue={selectedOption}
               onChange={setSelectedOption}
