@@ -13,6 +13,7 @@ import AddPublisher from "../pages/Dashboard/AddPublisher/AddPublisher";
 import PrivateRoute from "./PrivetRoute";
 import AdminRoute from "./AdminRoute";
 import MyArticles from "../pages/MyArticles/MyArticles";
+import Articles from "../pages/Articles/Articles";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyArticles></MyArticles>,
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/articles",
+        element: (
+          <PrivateRoute>
+            <Articles></Articles>,
           </PrivateRoute>
         ),
       },
