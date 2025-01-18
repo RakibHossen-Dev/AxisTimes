@@ -59,6 +59,7 @@ const AddArticle = () => {
         description: data.description,
         email: user?.email,
         status: "pending",
+        isPremium: "no",
       };
 
       const PublisherRes = await axiosSecure.post("/articles", articles);

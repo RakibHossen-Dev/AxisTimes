@@ -4,10 +4,11 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { FiEdit } from "react-icons/fi";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+import Swal from "sweetalert2";
 const MyArticles = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
-  const { data: articles = [] } = useQuery({
+  const { data: articles = [], refetch } = useQuery({
     queryKey: ["articles", user.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/articles/${user.email}`);
@@ -16,6 +17,36 @@ const MyArticles = () => {
   });
 
   console.log(articles);
+
+  const handleDelete = async (id) => {
+    console.log("Deleted", id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure
+          .delete(`/articles/${id}`)
+          .then((result) => {
+            refetch();
+
+            // console.log(result.data);
+            if (result.data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Articale has been deleted.",
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+  };
   return (
     <div className="w-11/12 mx-auto">
       <h2 className="my-8 font-semibold text-rose-600 text-3xl text-center">
@@ -75,7 +106,7 @@ const MyArticles = () => {
                 </td>
                 <td className="px-6 py-4">
                   <button className="bg-blue-100 py-1 px-3 text-blue-600 rounded-md">
-                    isPremium
+                    {article.isPremium}
                   </button>
                 </td>
                 <td className="px-6 py-4">
@@ -84,7 +115,10 @@ const MyArticles = () => {
                   </button>
                 </td>
                 <td className="px-6 py-4">
-                  <button className="bg-red-100 py-1 px-3 text-red-600 rounded-md">
+                  <button
+                    onClick={() => handleDelete(article._id)}
+                    className="bg-red-100 py-1 px-3 text-red-600 rounded-md"
+                  >
                     <MdOutlineDeleteOutline className="text-xl" />
                   </button>
                 </td>
