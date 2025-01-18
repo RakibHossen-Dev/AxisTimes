@@ -23,7 +23,7 @@ const Articles = () => {
   console.log(articles);
   return (
     <div className="w-11/12 mx-auto my-10">
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 grid-cols-1">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 grid-cols-1">
         {articles.map((article) => (
           <div className=" rounded overflow-hidden shadow-lg bg-white">
             <img
@@ -50,11 +50,11 @@ const Articles = () => {
               </p> */}
               {/* Description */}
               <p className="text-gray-700 text-base">
-                {article.description.slice(0, 100)}...
+                {article.description?.slice(0, 100)}...
               </p>
 
               <button className="mt-4 py-1 px-6 bg-rose-600 text-rose-100 rounded-sm">
-                <Link>Details</Link>
+                <Link to={`/articleDetails/${article._id}`}>Details</Link>
               </button>
             </div>
           </div>

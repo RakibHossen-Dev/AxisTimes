@@ -14,6 +14,7 @@ import PrivateRoute from "./PrivetRoute";
 import AdminRoute from "./AdminRoute";
 import MyArticles from "../pages/MyArticles/MyArticles";
 import Articles from "../pages/Articles/Articles";
+import ArticlesDetails from "../pages/ArticlesDetails/ArticlesDetails";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
             <Articles></Articles>,
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/articleDetails/:id",
+        element: <ArticlesDetails></ArticlesDetails>,
       },
       {
         path: "/addArticle",
