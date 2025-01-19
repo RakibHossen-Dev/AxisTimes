@@ -35,13 +35,16 @@ const Navber = () => {
               <Link to="/articles">All Articles</Link>
             </li>
             <li>
-              <Link to="/product">Subscription</Link>
+              <Link to="/Subscription ">Subscription</Link>
             </li>
             <li>
               <Link to="/dashboard/adminHome">Dashboard </Link>
             </li>
             <li>
               <Link to="/myArticles">My Articles</Link>
+            </li>
+            <li>
+              <Link to="/premiumArticles">Premium Articles</Link>
             </li>
           </ul>
         </div>
@@ -94,13 +97,16 @@ const Navber = () => {
             </li>
 
             <li>
-              <Link to="/product">Subscription</Link>
+              <Link to="/Subscription ">Subscription</Link>
             </li>
             <li>
-              <Link to="/contact">Dashboard </Link>
+              <Link to="/dashboard/adminHome">Dashboard </Link>
             </li>
             <li>
               <Link to="/myArticles">My Articles</Link>
+            </li>
+            <li>
+              <Link to="/premiumArticles">Premium Articles</Link>
             </li>
             <li className="flex items-center gap-3 w-full">
               <button className="py-1 px-4 border w-full hover:bg-black hover:text-white border-black text-black transition ease-linear duration-200">

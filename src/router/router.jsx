@@ -16,6 +16,8 @@ import MyArticles from "../pages/MyArticles/MyArticles";
 import Articles from "../pages/Articles/Articles";
 import ArticlesDetails from "../pages/ArticlesDetails/ArticlesDetails";
 import UpdateMyArticle from "../pages/UpdateMyArticle/UpdateMyArticle";
+import PremiumArticles from "../pages/PremiumArticles/PremiumArticles";
+import Subscription from "../pages/Subscription/Subscription";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +51,22 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyArticles></MyArticles>,
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/subscription ",
+        element: (
+          <PrivateRoute>
+            <Subscription></Subscription>,
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/premiumArticles",
+        element: (
+          <PrivateRoute>
+            <PremiumArticles></PremiumArticles>,
           </PrivateRoute>
         ),
       },
