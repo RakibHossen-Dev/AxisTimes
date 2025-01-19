@@ -7,6 +7,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FiEdit } from "react-icons/fi";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 const MyArticles = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
@@ -113,7 +114,9 @@ const MyArticles = () => {
                 </td>
                 <td className="px-6 py-4">
                   <button className="bg-green-100 py-1 px-3 text-green-600 rounded-md">
-                    <FiEdit className="text-xl " />
+                    <Link to={`/updateArticle/${article._id}`}>
+                      <FiEdit className="text-xl " />
+                    </Link>
                   </button>
                 </td>
                 <td className="px-6 py-4">
@@ -126,7 +129,7 @@ const MyArticles = () => {
                 </td>
                 <td className="px-6 py-4">
                   <button className="bg-rose-100 py-1 px-3 text-rose-600 rounded-md">
-                    Details
+                    <Link to={`/articleDetails/${article._id}`}>Details</Link>
                   </button>
                 </td>
               </tr>

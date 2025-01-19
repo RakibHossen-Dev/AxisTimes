@@ -6,6 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProvider";
+import { useLoaderData, useNavigate } from "react-router-dom";
+
 const options = [
   { value: "programming", label: "programming" },
   { value: "Business", label: "Business" },
@@ -23,7 +25,10 @@ const options = [
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-const AddArticle = () => {
+const UpdateMyArticle = () => {
+  const navigate = useNavigate();
+  const updateArticle = useLoaderData();
+  console.log("updateArticle", updateArticle);
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
 
@@ -63,18 +68,23 @@ const AddArticle = () => {
         isPremium: "no",
       };
 
-      const PublisherRes = await axiosSecure.post("/articles", articles);
+      const PublisherRes = await axiosSecure.patch(
+        `/article/${updateArticle._id}`,
+        articles
+      );
       console.log(PublisherRes.data);
-      if (PublisherRes.data.insertedId) {
+      if (PublisherRes.data.modifiedCount > 0) {
         reset();
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Addeed New Articles",
+          title: "Updated Article",
           showConfirmButton: false,
 
           timer: 1500,
         });
+
+        navigate("/myArticles");
       }
     }
 
@@ -85,7 +95,7 @@ const AddArticle = () => {
     <div className="flex justify-center items-center py-10 md:px-0 px-3   bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
         <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
-          Add Article
+          Update Article
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Title */}
@@ -99,6 +109,7 @@ const AddArticle = () => {
             <input
               type="text"
               id="title"
+              defaultValue={updateArticle.title}
               {...register("title", { required: "Title is required" })}
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Enter article title"
@@ -143,6 +154,7 @@ const AddArticle = () => {
             <select
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
               name="publisher"
+              defaultValue={updateArticle.publisher}
               id=""
               {...register("publisher", {
                 required: "Publisher name is required",
@@ -190,6 +202,7 @@ const AddArticle = () => {
             </label>
             <textarea
               id="description"
+              defaultValue={updateArticle.description}
               {...register("description", {
                 required: "Description is required",
               })}
@@ -217,4 +230,4 @@ const AddArticle = () => {
   );
 };
 
-export default AddArticle;
+export default UpdateMyArticle;

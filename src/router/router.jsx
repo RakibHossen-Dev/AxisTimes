@@ -15,6 +15,7 @@ import AdminRoute from "./AdminRoute";
 import MyArticles from "../pages/MyArticles/MyArticles";
 import Articles from "../pages/Articles/Articles";
 import ArticlesDetails from "../pages/ArticlesDetails/ArticlesDetails";
+import UpdateMyArticle from "../pages/UpdateMyArticle/UpdateMyArticle";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,16 @@ export const router = createBrowserRouter([
             <MyProfile></MyProfile>,
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/updateArticle/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateMyArticle></UpdateMyArticle>,
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:9000/article/${params.id}`),
       },
       {
         path: "/myArticles",

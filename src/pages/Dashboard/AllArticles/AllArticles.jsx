@@ -26,6 +26,27 @@ const AllArticles = () => {
     },
   });
 
+  // handleMakepremium
+  const handleMakepremium = (premium, id) => {
+    console.log(id);
+    axiosSecure
+      .patch(`/ispremium/${id}`, {
+        isPremium: premium,
+      })
+      .then((res) => {
+        refetch();
+        if (res.data.modifiedCount) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `This Article Premium Now!`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
+
   const handleMakeApprove = (approve, id) => {
     // const handleMakeApprove = (approve, id) => {
     console.log(approve, id);
@@ -163,7 +184,7 @@ const AllArticles = () => {
                         {article.title}
                       </h3>
                       <p className="text-md font-medium text-gray-800 dark:text-white">
-                        Rakib Hossen
+                        Author: {article.name}
                       </p>
                       <p className="text-xs text-gray-600 dark:text-gray-400">
                         <span className="font-medium">Publisher:</span>{" "}
@@ -196,7 +217,10 @@ const AllArticles = () => {
                       Approve
                     </button>
 
-                    <button className="bg-purple-100 text-purple-600 py-2 px-3 rounded-md">
+                    <button
+                      onClick={() => handleMakepremium("yes", article._id)}
+                      className="bg-purple-100 text-purple-600 py-2 px-3 rounded-md"
+                    >
                       Make Premium
                     </button>
                     <button className="bg-blue-100 cursor-text text-blue-600 py-2 px-3 rounded-md">
