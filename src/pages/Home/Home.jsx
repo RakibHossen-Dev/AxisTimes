@@ -1,5 +1,13 @@
+import Plans from "../../components/Plans";
+import Publisher from "../../components/Publisher";
+
 const Home = () => {
-  return <div>This is Home page</div>;
+  return (
+    <div>
+      <Publisher></Publisher>
+      <Plans></Plans>
+    </div>
+  );
 };
 
 export default Home;

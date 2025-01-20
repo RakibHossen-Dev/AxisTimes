@@ -35,7 +35,7 @@ const Navber = () => {
               <Link to="/articles">All Articles</Link>
             </li>
             <li>
-              <Link to="/Subscription ">Subscription</Link>
+              <Link to="/subscription">Subscription</Link>
             </li>
             <li>
               <Link to="/dashboard/adminHome">Dashboard </Link>
@@ -97,7 +97,7 @@ const Navber = () => {
             </li>
 
             <li>
-              <Link to="/Subscription ">Subscription</Link>
+              <Link to="/subscription">Subscription</Link>
             </li>
             <li>
               <Link to="/dashboard/adminHome">Dashboard </Link>

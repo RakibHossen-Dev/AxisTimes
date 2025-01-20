@@ -18,6 +18,7 @@ import ArticlesDetails from "../pages/ArticlesDetails/ArticlesDetails";
 import UpdateMyArticle from "../pages/UpdateMyArticle/UpdateMyArticle";
 import PremiumArticles from "../pages/PremiumArticles/PremiumArticles";
 import Subscription from "../pages/Subscription/Subscription";
+import Payment from "../pages/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyProfile></MyProfile>,
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/payment",
+        element: (
+          <PrivateRoute>
+            <Payment></Payment>,
           </PrivateRoute>
         ),
       },
@@ -55,7 +64,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/subscription ",
+        path: "/subscription",
         element: (
           <PrivateRoute>
             <Subscription></Subscription>,
