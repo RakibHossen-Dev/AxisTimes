@@ -19,7 +19,7 @@ const Plans = () => {
       <h2 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-pink-400 mb-8">
         Subscription Plans
       </h2>
-      <div className="flex lg:flex-row flex-col items-center justify-center gap-10 mt-8 mb-20">
+      {/* <div className="flex lg:flex-row flex-col items-center justify-center gap-10 mt-8 mb-20">
         {subscriptions.map((subscription) => (
           <div className="w-96 p-8 bg-gradient-to-r from-blue-600 to-blue-400 rounded-3xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-4xl relative">
             <div className="absolute top-6 left-6 bg-gradient-to-r from-blue-700 to-blue-500 text-white py-2 px-6 rounded-full text-lg font-bold shadow-lg">
@@ -41,13 +41,13 @@ const Plans = () => {
             </button>
           </div>
         ))}
-      </div>
-      {/* <div className="flex lg:flex-row flex-col items-center justify-center gap-10 my-">
+      </div> */}
+      <div className="flex lg:flex-row flex-col items-center justify-center gap-10 mb-10">
         <div className="w-96 p-8 bg-gradient-to-r from-blue-600 to-blue-400 rounded-3xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-4xl relative">
           <div className="absolute top-6 left-6 bg-gradient-to-r from-blue-700 to-blue-500 text-white py-2 px-6 rounded-full text-lg font-bold shadow-lg">
             Basic
           </div>
-          <h2 className="text-4xl font-extrabold text-center text-white mt-8">
+          <h2 className="text-4xl font-extrabold text-center text-white mt-14">
             1 Minute
           </h2>
           <p className="text-center text-xl text-gray-200 mt-4">
@@ -65,7 +65,7 @@ const Plans = () => {
           <div className="absolute top-6 left-6 bg-gradient-to-r from-green-600 to-green-500 text-white py-2 px-6 rounded-full text-lg font-bold shadow-lg">
             Premium
           </div>
-          <h2 className="text-4xl font-extrabold text-center text-white mt-8">
+          <h2 className="text-4xl font-extrabold text-center text-white mt-14">
             5 Days
           </h2>
           <p className="text-center text-xl text-gray-100 mt-4">
@@ -83,7 +83,7 @@ const Plans = () => {
           <div className="absolute top-6 left-6 bg-gradient-to-r from-rose-600 to-rose-500 text-white py-2 px-6 rounded-full text-lg font-bold shadow-lg">
             Premium
           </div>
-          <h2 className="text-4xl font-extrabold text-center text-white mt-8">
+          <h2 className="text-4xl font-extrabold text-center text-white mt-14">
             10 Days
           </h2>
           <p className="text-center text-xl text-gray-100 mt-4">
@@ -96,7 +96,7 @@ const Plans = () => {
             <Link to="/subscription">Take Subscription</Link>
           </button>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

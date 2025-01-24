@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Articles = () => {
   const {
@@ -21,11 +22,21 @@ const Articles = () => {
   });
 
   console.log(articles);
+
+  const handleViewCount = (id) => {
+    console.log(id);
+    axiosSecure.patch(`/viewCount/${id}`).then((res) => {
+      refetch();
+    });
+  };
   return (
     <div className="w-11/12 mx-auto my-10">
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 grid-cols-1">
         {articles.map((article) => (
-          <div className=" rounded overflow-hidden shadow-lg bg-white">
+          <div className="relative rounded overflow-hidden shadow-lg bg-white">
+            <p className="bg-rose-600 text-white py-1 px-3 absolute top-2 right-2 rounded-md text-center w-24">
+              {article.viewCount} Views
+            </p>
             <img
               className="w-full h-48 object-cover"
               src={article.image}
@@ -43,17 +54,15 @@ const Articles = () => {
               <h4 className="font-semibold text-md mb-2 text-gray-900  cursor-pointer">
                 Publisher: {article.publisher}
               </h4>
-              {/* Author and Meta */}
-              {/* <p className="text-gray-500 text-sm mb-2">
-                By {author} — {date}{" "}
-                <span className="ml-2">• {comments} Comments</span>
-              </p> */}
-              {/* Description */}
+
               <p className="text-gray-700 text-base">
                 {article.description?.slice(0, 100)}...
               </p>
 
-              <button className="mt-4 py-1 px-6 bg-rose-600 text-rose-100 rounded-sm">
+              <button
+                onClick={() => handleViewCount(article._id)}
+                className="mt-4 py-1 px-6 bg-rose-600 text-rose-100 rounded-sm"
+              >
                 <Link to={`/articleDetails/${article._id}`}>Details</Link>
               </button>
             </div>

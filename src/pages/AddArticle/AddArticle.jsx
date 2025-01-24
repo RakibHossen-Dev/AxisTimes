@@ -51,16 +51,21 @@ const AddArticle = () => {
       },
     });
     if (res.data.success) {
+      const selectedPublisher = publishers.find(
+        (publisher) => publisher.name === data.publisher
+      );
       const articles = {
         title: data.title,
         image: res.data.data.display_url,
         publisher: data.publisher,
+        publisherId: selectedPublisher?._id,
         tag: selectedOption,
         description: data.description,
         email: user?.email,
         name: user?.displayName,
         status: "pending",
         isPremium: "no",
+        viewCount: 0,
       };
 
       const PublisherRes = await axiosSecure.post("/articles", articles);

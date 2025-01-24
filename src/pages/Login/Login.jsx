@@ -21,6 +21,8 @@ const Login = () => {
         name: result.user?.displayName,
         email: result.user?.email,
         photo: result.user?.photoURL,
+        premiumTaken: null,
+        premiumEnds: null,
       };
       axiosPublic.post("/users", userInfo).then((res) => {
         console.log(res);

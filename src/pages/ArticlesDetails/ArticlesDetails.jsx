@@ -78,9 +78,10 @@ const ArticlesDetails = () => {
                   : "text-red-500"
               }`}
             >
-              Status:{" "}
+              {articles.viewCount} Views
+              {/* Status:{" "}
               {articles?.status?.charAt(0)?.toUpperCase() +
-                articles?.status?.slice(1)}
+                articles?.status?.slice(1)} */}
             </p>
           </div>
           <div>

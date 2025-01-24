@@ -1,31 +1,83 @@
+import { Chart } from "react-google-charts";
+
+// import { Chart } from "react-google-charts";
 const AdminHome = () => {
+  const data = [
+    ["Task", "Hours per Day"],
+    ["PublicationA", 9],
+    ["PublicationB", 2],
+    ["PublicationC", 2],
+    ["PublicationD", 2],
+    ["PublicationE", 7],
+  ];
+
+  const options = {
+    title: "Publication",
+  };
+
+
+
+  const datas = [
+    ["Element", "Density", { role: "style" }],
+    ["Copper", 8.94, "#b87333"], // RGB value
+    ["Silver", 10.49, "#8e44ad"], // English color name
+    ["Gold", 19.3, "#f39c12"],
+    ["Platinum", 21.45, "color: #1abc9c"], // CSS-style declaration
+  ];
+
+
+
+  const UserData = [
+    ["Country", "Popularity"],
+    ["Germany", 200],
+    ["United States", 300],
+    ["Brazil", 400],
+    ["Canada", 500],
+    ["France", 600],
+    ["RU", 700],
+    ["BD", 700],
+    ["PK", 300],
+    ["UAE", 600],
+  ];
   return (
     <div>
-      This is admin Home page
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi vero
-        minus doloribus ipsam! Quidem magnam ut quis provident maxime aliquam
-        libero vero vitae pariatur sunt recusandae vel hic, facere modi dicta.
-        Eaque, reiciendis nam ipsam blanditiis rerum recusandae quaerat hic
-        itaque error corporis vel tempora numquam qui quia aliquam ad facilis
-        est voluptas. Atque, natus culpa exercitationem vel ad dolores rem.
-        Iure, optio debitis delectus quasi nisi eos consequatur cupiditate
-        architecto ullam est, unde mollitia ex explicabo dicta atque aperiam!
-        Iste molestias, minima quidem officia autem pariatur placeat officiis
-        eum numquam, facilis rerum unde facere blanditiis dicta qui magnam
-        aliquid repellendus velit assumenda ratione harum vel mollitia soluta.
-        Nam reiciendis vero dolore recusandae ratione aliquam delectus
-        blanditiis esse! Earum consequuntur asperiores cumque, sunt cum iure ea
-        sapiente aperiam est quo natus praesentium. Corrupti dolorem amet
-        tenetur facilis pariatur ipsa molestias minima iusto placeat modi
-        sapiente ullam nemo veritatis illum hic omnis sed repudiandae, nihil
-        laudantium iste possimus! Vitae recusandae neque, voluptatum numquam
-        repellat autem. Exercitationem, maiores illo nam quidem nemo magni aut
-        facilis repellendus odio, asperiores nostrum accusamus velit eligendi
-        placeat odit sit eos adipisci nobis aliquam. Alias labore assumenda
-        libero a iusto explicabo voluptatem? Dolores cupiditate perferendis ad
-        consequuntur.
-      </p>
+      <Chart
+      chartType="PieChart"
+      data={data}
+      options={options}
+      width={"100%"}
+      height={"400px"}
+    />
+
+
+
+
+    <div  className="mb-10">
+       <Chart chartType="ColumnChart" width="100%" height="100%" data={datas} />
+    </div>
+
+
+<div >
+<Chart
+      chartEvents={[
+        {
+          eventName: "select",
+          callback: ({ chartWrapper }) => {
+            const chart = chartWrapper.getChart();
+            const selection = chart.getSelection();
+            if (selection.length === 0) return;
+            const region = UserData[selection[0].row + 1];
+            console.log("Selected : " + region);
+          },
+        },
+      ]}
+      chartType="GeoChart"
+      width="100%"
+      height="100%"
+      data={UserData}
+    />
+    </div>
+
     </div>
   );
 };

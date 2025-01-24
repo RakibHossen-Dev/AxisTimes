@@ -25,8 +25,8 @@ const Publisher = () => {
       </h2>
       <Swiper watchSlidesProgress={true} slidesPerView={4} className="mySwiper">
         {publishers.map((publisher) => (
-          <SwiperSlide>
-            <div className="p-3 flex flex-col justify-center items-center ">
+          <SwiperSlide key={publisher._id}>
+            <div  className="p-3 flex flex-col justify-center items-center ">
               <img
                 className="w-40 p-3 rounded-full  border"
                 src={publisher.logo}

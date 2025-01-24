@@ -38,6 +38,8 @@ const Register = () => {
             name: data.name,
             email: data.email,
             photo: res.data.data.display_url,
+            premiumTaken: null,
+            premiumEnds: null,
           };
           axiosPublic.post("/users", userInfo).then((res) => {
             navigate("/");
@@ -59,12 +61,12 @@ const Register = () => {
         name: result.user?.displayName,
         email: result.user?.email,
         photo: result.user?.photoURL,
+        premiumTaken: null,
+        premiumEnds: null,
       };
       axiosPublic.post("/users", userInfo).then((res) => {
         console.log(res);
       });
-
-      // console.log("Register Successfull");
     });
   };
 
