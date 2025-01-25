@@ -54,13 +54,13 @@ const Footer = () => {
         {/* Subscribe and Social Media */}
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Subscribe</h3>
-          <form className="flex items-center space-x-2">
+          <form className="flex items-center md:space-x-2 space-x-1">
             <input
               type="email"
               placeholder="Your email"
-              className="px-4 py-2 bg-black text-white rounded focus:outline-none"
+              className="md:px-4 px-2 py-2 bg-black text-white rounded focus:outline-none"
             />
-            <button className="px-4 text-black py-2 bg-white rounded hover:bg-blue-500">
+            <button className="md:px-4 px-2 text-black py-2 bg-white rounded hover:bg-blue-500">
               Subscribe
             </button>
           </form>

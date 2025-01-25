@@ -1,21 +1,31 @@
 import { Chart } from "react-google-charts";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
-// import { Chart } from "react-google-charts";
 const AdminHome = () => {
+  const axiosSecure = useAxiosSecure();
+
+  const { data: publications = [], refetch } = useQuery({
+    queryKey: ["publication"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/publication");
+      return res.data;
+    },
+  });
+
+  // console.log(publications);
+
   const data = [
     ["Task", "Hours per Day"],
-    ["PublicationA", 9],
-    ["PublicationB", 2],
-    ["PublicationC", 2],
-    ["PublicationD", 2],
-    ["PublicationE", 7],
+    ...publications.map((publication) => [
+      publication.publisherName,
+      publication.articleCount,
+    ]),
   ];
 
   const options = {
     title: "Publication",
   };
-
-
 
   const datas = [
     ["Element", "Density", { role: "style" }],
@@ -24,8 +34,6 @@ const AdminHome = () => {
     ["Gold", 19.3, "#f39c12"],
     ["Platinum", 21.45, "color: #1abc9c"], // CSS-style declaration
   ];
-
-
 
   const UserData = [
     ["Country", "Popularity"],
@@ -42,42 +50,42 @@ const AdminHome = () => {
   return (
     <div>
       <Chart
-      chartType="PieChart"
-      data={data}
-      options={options}
-      width={"100%"}
-      height={"400px"}
-    />
+        chartType="PieChart"
+        data={data}
+        options={options}
+        width={"100%"}
+        height={"400px"}
+      />
 
+      <div className="mb-10">
+        <Chart
+          chartType="ColumnChart"
+          width="100%"
+          height="100%"
+          data={datas}
+        />
+      </div>
 
-
-
-    <div  className="mb-10">
-       <Chart chartType="ColumnChart" width="100%" height="100%" data={datas} />
-    </div>
-
-
-<div >
-<Chart
-      chartEvents={[
-        {
-          eventName: "select",
-          callback: ({ chartWrapper }) => {
-            const chart = chartWrapper.getChart();
-            const selection = chart.getSelection();
-            if (selection.length === 0) return;
-            const region = UserData[selection[0].row + 1];
-            console.log("Selected : " + region);
-          },
-        },
-      ]}
-      chartType="GeoChart"
-      width="100%"
-      height="100%"
-      data={UserData}
-    />
-    </div>
-
+      <div>
+        <Chart
+          chartEvents={[
+            {
+              eventName: "select",
+              callback: ({ chartWrapper }) => {
+                const chart = chartWrapper.getChart();
+                const selection = chart.getSelection();
+                if (selection.length === 0) return;
+                const region = UserData[selection[0].row + 1];
+                console.log("Selected : " + region);
+              },
+            },
+          ]}
+          chartType="GeoChart"
+          width="100%"
+          height="100%"
+          data={UserData}
+        />
+      </div>
     </div>
   );
 };

@@ -17,10 +17,10 @@ const Navber = () => {
   };
   return (
     <div className="bg-rose-600">
-      <nav className="flex justify-between items-center border-b  py-3 px-5  md:px-10">
+      <nav className="flex justify-between items-center border-b  py-3 px-4  md:px-10">
         <div>
           <Link to="/">
-            <img src={axisTimes} className="w-60" alt="" />
+            <img src={axisTimes} className="md:w-60 w-48" alt="" />
           </Link>
         </div>
         <div>
