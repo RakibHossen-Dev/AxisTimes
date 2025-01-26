@@ -162,42 +162,48 @@ const Articles = () => {
         </div> */}
       </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 grid-cols-1">
-        {articles.map((article) => (
-          <div className="relative rounded overflow-hidden shadow-lg bg-white">
-            <p className="bg-rose-600 text-white py-1 px-3 absolute top-2 right-2 rounded-md text-center w-24">
-              {article.viewCount} Views
-            </p>
-            <img
-              className="w-full h-48 object-cover"
-              src={article.image}
-              alt={article.title}
-            />
-            <div className="px-6 py-4">
-              {/* Category Tag */}
-              <div className="text-green-500 font-bold text-xs mb-2 uppercase">
-                {article.category}
-              </div>
-              {/* Title */}
-              <h2 className="font-bold text-lg mb-2 text-gray-900 hover:text-rose-500 cursor-pointer">
-                {article.title}
-              </h2>
-              <h4 className="font-semibold text-md mb-2 text-gray-900  cursor-pointer">
-                Publisher: {article.publisher}
-              </h4>
-
-              <p className="text-gray-700 text-base">
-                {article.description?.slice(0, 100)}...
+        {articles
+          .filter((article) => article.status === "approve")
+          .map((article) => (
+            <div
+              className={`relative rounded overflow-hidden shadow-lg  ${
+                article.isPremium === "no" ? "bg-white" : " bg-rose-100"
+              } `}
+            >
+              <p className="bg-rose-600 text-white py-1 px-3 absolute top-2 right-2 rounded-md text-center w-24">
+                {article.viewCount} Views
               </p>
+              <img
+                className="w-full h-48 object-cover"
+                src={article.image}
+                alt={article.title}
+              />
+              <div className="px-6 py-4">
+                {/* Category Tag */}
+                <div className="text-green-500 font-bold text-xs mb-2 uppercase">
+                  {article.category}
+                </div>
+                {/* Title */}
+                <h2 className="font-bold text-lg mb-2 text-gray-900 hover:text-rose-500 cursor-pointer">
+                  {article.title}
+                </h2>
+                <h4 className="font-semibold text-md mb-2 text-gray-900  cursor-pointer">
+                  Publisher: {article.publisher}
+                </h4>
 
-              <button
-                onClick={() => handleViewCount(article._id)}
-                className="mt-4 py-1 px-6 bg-rose-600 text-rose-100 rounded-sm"
-              >
-                <Link to={`/articleDetails/${article._id}`}>Details</Link>
-              </button>
+                <p className="text-gray-700 text-base">
+                  {article.description?.slice(0, 100)}...
+                </p>
+
+                <button
+                  onClick={() => handleViewCount(article._id)}
+                  className="mt-4 py-1 px-6 bg-rose-600 text-rose-100 rounded-sm"
+                >
+                  <Link to={`/articleDetails/${article._id}`}>Details</Link>
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

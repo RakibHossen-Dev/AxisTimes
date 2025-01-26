@@ -7,7 +7,7 @@ const PremiumArticles = () => {
   const { data: articles = [], refetch } = useQuery({
     queryKey: ["articles"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/articles");
+      const res = await axiosSecure.get("/allArticles");
       return res.data;
     },
   });
@@ -17,8 +17,8 @@ const PremiumArticles = () => {
     <div className="w-11/12 mx-auto my-10">
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 grid-cols-1">
         {articles
-          .filter((article) => article.isPremium === "yes")
-          .map((article) => (
+          ?.filter((article) => article.isPremium === "yes")
+          ?.map((article) => (
             <div className=" rounded overflow-hidden shadow-lg bg-rose-200">
               <img
                 className="w-full h-48 object-cover"

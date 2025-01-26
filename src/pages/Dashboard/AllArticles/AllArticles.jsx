@@ -103,13 +103,12 @@ const AllArticles = () => {
     if (data.declineReason.trim()) {
       // API Call
       axiosSecure
-        .post("/declineReasons", {
-          reason: data.declineReason,
-          declineId: selectedArticleId,
+        .patch(`/declineReasons/${selectedArticleId}`, {
+          declineReason: data.declineReason,
         })
         .then((response) => {
           // Success Message
-          if (response.data.insertedId) {
+          if (response.data.modifiedCount) {
             reset();
             Swal.fire({
               position: "top-end",
