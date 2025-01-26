@@ -27,10 +27,27 @@ const TrendingArticles = () => {
       <h2 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-pink-400 mb-8">
         Tending Rrticles
       </h2>
-      <Swiper watchSlidesProgress={true} slidesPerView={3} className="mySwiper">
+      <Swiper
+        watchSlidesProgress={true}
+        breakpoints={{
+          // When the viewport is >= 640px (tablet), show 2 slides
+          640: {
+            slidesPerView: 2,
+          },
+          // When the viewport is >= 768px (desktop), show 4 slides
+          768: {
+            slidesPerView: 3,
+          },
+          // Default (mobile): show 1 slide
+          0: {
+            slidesPerView: 1,
+          },
+        }}
+        className="mySwiper"
+      >
         {tendingRrticles.map((article) => (
           <SwiperSlide key={article._id}>
-            <div  className="relative rounded overflow-hidden border bg-white m-4">
+            <div className="relative rounded overflow-hidden border bg-white m-4 lg:h-full h-[480px]">
               <p className="bg-rose-600 text-white py-1 px-3 absolute top-2 right-2 rounded-md text-center w-24">
                 {article.viewCount} Views
               </p>

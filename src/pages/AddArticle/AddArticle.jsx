@@ -36,6 +36,7 @@ const AddArticle = () => {
   });
 
   const [selectedOption, setSelectedOption] = useState(null);
+  console.log(selectedOption);
   const {
     register,
     handleSubmit,
@@ -54,12 +55,14 @@ const AddArticle = () => {
       const selectedPublisher = publishers.find(
         (publisher) => publisher.name === data.publisher
       );
+
+      const tagsArray = selectedOption?.map((option) => option.value);
       const articles = {
         title: data.title,
         image: res.data.data.display_url,
         publisher: data.publisher,
         publisherId: selectedPublisher?._id,
-        tag: selectedOption,
+        tag: tagsArray,
         description: data.description,
         email: user?.email,
         name: user?.displayName,

@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 const DashboardLayout = () => {
+  const { logOut } = useContext(AuthContext);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -65,10 +68,10 @@ const DashboardLayout = () => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M3 10l9-7 9 7v10a2 2 0 01-2 2H5a2 2 0 01-2-2V10z"
+                    d="M9.75 3v8.25H3M21 21l-6-6m0 0a8.25 8.25 0 10-11.67-11.67A8.25 8.25 0 0015 15z"
                   />
                 </svg>
-                <span>Admin Home</span>
+                <span>Dashboard</span>
               </Link>
             </li>
             <li>
@@ -139,6 +142,53 @@ const DashboardLayout = () => {
                 </svg>
                 <span>Add Publisher</span>
               </Link>
+            </li>
+            <div className="border-b-2 border-rose-300"></div>
+            <li>
+              <Link
+                to="/"
+                className="flex items-center p-2 text-gray-800 rounded-lg hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
+              >
+                {/* Home Icon */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-5 h-5 mr-3"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 10l9-7 9 7v10a2 2 0 01-2 2H5a2 2 0 01-2-2V10z"
+                  />
+                </svg>
+                <span>Home</span>
+              </Link>
+            </li>
+
+            {/* Logout Link */}
+            <li
+              onClick={logOut}
+              className="flex items-center p-2 cursor-pointer text-gray-800 rounded-lg hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
+            >
+              {/* Logout Icon */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5 mr-3"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6-4v1a3 3 0 11-6 0V7a3 3 0 116 0v1m0 6a3 3 0 01-6 0v-1"
+                />
+              </svg>
+              <span>Logout</span>
             </li>
           </ul>
         </div>

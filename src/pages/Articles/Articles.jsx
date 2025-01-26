@@ -3,34 +3,164 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useState } from "react";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Articles = () => {
+  const [selectedPublisher, setSelectedPublisher] = useState("");
+  const [selectedTag, setSelectedTag] = useState("");
+  const [search, setSearch] = useState("");
+  // console.log(selectedPublisher);
+  // console.log(selectedTag);
+  console.log(search);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
-
+  const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
+
+  // const { data: articles = [], refetch } = useQuery({
+  //   queryKey: ["articles", search, selectedPublisher],
+  //   queryFn: async () => {
+  //     const res = await axiosPublic.get(
+  //       `/allArticles?search=${search}&publisher=${selectedPublisher}`
+  //     );
+  //     return res.data;
+  //   },
+  //   enabled: search.length > 0 || selectedPublisher.length > 0 || !search,
+  //   refetchOnWindowFocus: false,
+  // });
+  // const { data: articles = [], refetch } = useQuery({
+  //   queryKey: ["articles", search, selectedPublisher, selectedTag], // selectedTag যুক্ত করা হলো
+  //   queryFn: async () => {
+  //     const res = await axiosPublic.get(
+  //       `/allArticles?search=${search}&publisher=${selectedPublisher}&tag=${selectedTag}` // ট্যাগ প্রেরণ
+  //     );
+  //     return res.data;
+  //   },
+  //   enabled:
+  //     search.length > 0 ||
+  //     selectedPublisher.length > 0 ||
+  //     selectedTag.length > 0 ||
+  //     !search, // ট্যাগ যুক্ত করা হলো
+  //   refetchOnWindowFocus: false,
+  // });
+  console.log(selectedTag);
   const { data: articles = [], refetch } = useQuery({
-    queryKey: ["articles"],
+    queryKey: ["articles", search, selectedPublisher, selectedTag],
     queryFn: async () => {
-      const res = await axiosSecure.get("/articles");
+      const res = await axiosPublic.get(
+        `/allArticles?search=${search}&publisher=${selectedPublisher}&tag=${selectedTag}`
+      );
+      return res.data;
+    },
+    enabled:
+      search.length > 0 ||
+      selectedPublisher.length > 0 ||
+      (Array.isArray(selectedTag) && selectedTag.length > 0) ||
+      !search,
+
+    refetchOnWindowFocus: false,
+  });
+
+  // Tag filter handler
+  const handleTagChange = (e) => {
+    setSelectedTag(e.target.value);
+    refetch();
+  };
+
+  // console.log(articles);
+  const { data: publishers = [] } = useQuery({
+    queryKey: ["publishers"],
+    queryFn: async () => {
+      const res = await axiosPublic.get("/publishers");
       return res.data;
     },
   });
 
-  console.log(articles);
-
   const handleViewCount = (id) => {
-    console.log(id);
+    // console.log(id);
     axiosSecure.patch(`/viewCount/${id}`).then((res) => {
       refetch();
     });
   };
   return (
     <div className="w-11/12 mx-auto my-10">
+      <div className="grid grid-cols-3 gap-5 items-center justify-between md:mb-12 mb-5">
+        <div>
+          {/* Publisher dropdown */}
+          <select
+            className="select select-bordered w-full"
+            value={selectedPublisher}
+            onChange={(e) => setSelectedPublisher(e.target.value)}
+          >
+            {publishers.map((publisher, index) => (
+              <option key={index} value={publisher.name}>
+                {publisher.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          {/* Tags dropdown */}
+          <select
+            className="select select-bordered w-full"
+            value={selectedTag}
+            onChange={handleTagChange} // নতুন হ্যান্ডলার ব্যবহার করা হলো
+          >
+            <option value="" disabled>
+              Filtered by tags
+            </option>
+            <option value="programming">Programming</option>
+            <option value="business">Business</option>
+            <option value="politics">Politics</option>
+            <option value="health">Health</option>
+            <option value="science">Science</option>
+            <option value="sports">Sports</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="lifestyle">Lifestyle</option>
+            <option value="education">Education</option>
+            <option value="world-news">World-News</option>
+            <option value="environment">Environment</option>
+            <option value="climate">Climate</option>
+          </select>
+        </div>
+
+        <div>
+          {/* Search input */}
+          <label className="input input-bordered flex items-center gap-2">
+            <input
+              type="text"
+              className="grow border-none focus:border-none"
+              placeholder="Search"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="h-4 w-4 opacity-70"
+            >
+              <path
+                fillRule="evenodd"
+                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </label>
+        </div>
+
+        {/* Display selected values */}
+        {/* <div>
+          <p>Selected Publisher: {selectedPublisher}</p>
+          <p>Selected Tag: {selectedTag}</p>
+          <p>Search Query: {searchQuery}</p>
+        </div> */}
+      </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 grid-cols-1">
         {articles.map((article) => (
           <div className="relative rounded overflow-hidden shadow-lg bg-white">

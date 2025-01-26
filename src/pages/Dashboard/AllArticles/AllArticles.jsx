@@ -6,8 +6,11 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
+import { Pagination } from "flowbite-react";
 
 const AllArticles = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 5; // Number of users per page
   const [selectedArticleId, setSelectedArticleId] = useState("");
   const {
     register,
@@ -18,14 +21,28 @@ const AllArticles = () => {
 
   const { user } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
+  // const { data: articles = [], refetch } = useQuery({
+  //   queryKey: ["articles"],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get(
+  //       `/articles?page=${currentPage}&pageSize=${pageSize}`
+  //     );
+  //     return res.data;
+  //   },
+  //   keepPreviousData: true,
+  // });
+
   const { data: articles = [], refetch } = useQuery({
-    queryKey: ["articles"],
+    queryKey: ["articles", currentPage], // Add currentPage to the queryKey
     queryFn: async () => {
-      const res = await axiosSecure.get("/articles");
+      const res = await axiosSecure.get(
+        `/articles?page=${currentPage}&pageSize=${pageSize}`
+      );
       return res.data;
     },
+    keepPreviousData: true, // Keep data while fetching new page data
   });
-
+  console.log(articles.articles);
   // handleMakepremium
   const handleMakepremium = (premium, id) => {
     console.log(id);
@@ -79,15 +96,6 @@ const AllArticles = () => {
       })
       .then((res) => {
         refetch();
-        // if (res.data.modifiedCount) {
-        //   Swal.fire({
-        //     position: "top-end",
-        //     icon: "success",
-        //     title: `Status update Admin Now!`,
-        //     showConfirmButton: false,
-        //     timer: 1500,
-        //   });
-        // }
       });
   };
 
@@ -146,6 +154,14 @@ const AllArticles = () => {
     });
   };
 
+  const onPageChange = (page) => {
+    setCurrentPage(page);
+    refetch();
+  };
+
+  // Assuming totalPages is passed from the API response
+  const totalPages = 100; // Replace this with the actual total page count from the API
+
   return (
     <div>
       <h2 className="my-8 font-semibold text-rose-600 text-3xl text-center">
@@ -165,7 +181,7 @@ const AllArticles = () => {
             </tr>
           </thead>
           <tbody>
-            {articles.map((article) => (
+            {articles?.articles?.map((article) => (
               <tr
                 key={article._id}
                 className="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-900 border-b dark:border-gray-700"
@@ -256,6 +272,13 @@ const AllArticles = () => {
             ))}
           </tbody>
         </table>
+        <div className="text-center my-5">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages} // You can get the total pages from your API
+            onPageChange={onPageChange} // Set the page to the current page
+          />
+        </div>
       </div>
 
       {/* Modal */}
