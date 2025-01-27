@@ -156,38 +156,11 @@ const AuthProvider = ({ children }) => {
           `/user/${currentUser.email}`
         );
         const userData = userResponse.data;
-
-        // if (userData.premiumTaken) {
-        //   const premiumTime = new Date(userData.premiumTaken);
-
-        //   // const currentTime = new Date();
-        //   const currentTime = new Date();
-        //   const isoFormatTime = currentTime.toISOString();
-
-        // // console.log("currentTime",currentTime);
-        //   if (isoFormatTime > premiumTime.toISOString()) {
-        //     // Subscription expired, reset `premiumTaken`
-        //     await axiosPublic.patch(`/resetPremium/${currentUser.email}`, {
-        //       premiumTaken: null,
-        //     });
-        //     console.log("Subscription expired. Resetting premium status.");
-        //     setUser((prevUser) => ({
-        //       ...prevUser,
-        //       premiumTaken: null,
-        //     }));
-        //   } else {
-        //     console.log("User is still a premium user.");
-        //   }
-
-        // }
-
-        // jgkfh
         if (userData.premiumEnds) {
           const premiumEndTime = new Date(userData.premiumEnds);
           const currentTime = new Date();
 
           if (currentTime > premiumEndTime) {
-            // Subscription expired, reset `premiumTaken` and `premiumEnds`
             await axiosPublic.patch(`/resetPremium/${currentUser.email}`, {
               premiumTaken: null,
               premiumEnds: null,

@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../hooks/useAxiosSecure";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 const TrendingArticles = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
 
   const { data: tendingRrticles = [], refetch } = useQuery({
     queryKey: ["rrticles"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/tendingRrticles");
+      const res = await axiosPublic.get("/tendingRrticles");
       return res.data;
     },
   });
@@ -47,7 +47,7 @@ const TrendingArticles = () => {
       >
         {tendingRrticles.map((article) => (
           <SwiperSlide key={article._id}>
-            <div className="relative rounded overflow-hidden border bg-white m-4 lg:h-full h-[480px]">
+            <div className="relative rounded overflow-hidden border bg-white m-4 lg:h-[430px]  h-[450px]">
               <p className="bg-rose-600 text-white py-1 px-3 absolute top-2 right-2 rounded-md text-center w-24">
                 {article.viewCount} Views
               </p>
@@ -62,7 +62,7 @@ const TrendingArticles = () => {
                   {article.category}
                 </div>
                 {/* Title */}
-                <h2 className="font-bold text-lg mb-2 text-gray-900 hover:text-rose-500 cursor-pointer">
+                <h2 className="font-bold text-lg mb-2 text-gray-900 hover:text-rose-500 ">
                   {article.title}
                 </h2>
                 <h4 className="font-semibold text-md mb-2 text-gray-900  cursor-pointer">
@@ -70,7 +70,7 @@ const TrendingArticles = () => {
                 </h4>
 
                 <p className="text-gray-700 text-base">
-                  {article.description?.slice(0, 100)}...
+                  {article.description?.slice(0, 80)}...
                 </p>
 
                 <Link to={`/articleDetails/${article._id}`}>

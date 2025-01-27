@@ -10,8 +10,6 @@ const Articles = () => {
   const [selectedPublisher, setSelectedPublisher] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
   const [search, setSearch] = useState("");
-  // console.log(selectedPublisher);
-  // console.log(selectedTag);
   console.log(search);
   const {
     register,
@@ -22,32 +20,7 @@ const Articles = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
 
-  // const { data: articles = [], refetch } = useQuery({
-  //   queryKey: ["articles", search, selectedPublisher],
-  //   queryFn: async () => {
-  //     const res = await axiosPublic.get(
-  //       `/allArticles?search=${search}&publisher=${selectedPublisher}`
-  //     );
-  //     return res.data;
-  //   },
-  //   enabled: search.length > 0 || selectedPublisher.length > 0 || !search,
-  //   refetchOnWindowFocus: false,
-  // });
-  // const { data: articles = [], refetch } = useQuery({
-  //   queryKey: ["articles", search, selectedPublisher, selectedTag], // selectedTag যুক্ত করা হলো
-  //   queryFn: async () => {
-  //     const res = await axiosPublic.get(
-  //       `/allArticles?search=${search}&publisher=${selectedPublisher}&tag=${selectedTag}` // ট্যাগ প্রেরণ
-  //     );
-  //     return res.data;
-  //   },
-  //   enabled:
-  //     search.length > 0 ||
-  //     selectedPublisher.length > 0 ||
-  //     selectedTag.length > 0 ||
-  //     !search, // ট্যাগ যুক্ত করা হলো
-  //   refetchOnWindowFocus: false,
-  // });
+  
   console.log(selectedTag);
   const { data: articles = [], refetch } = useQuery({
     queryKey: ["articles", search, selectedPublisher, selectedTag],
@@ -195,12 +168,14 @@ const Articles = () => {
                   {article.description?.slice(0, 100)}...
                 </p>
 
-                <button
-                  onClick={() => handleViewCount(article._id)}
-                  className="mt-4 py-1 px-6 bg-rose-600 text-rose-100 rounded-sm"
-                >
-                  <Link to={`/articleDetails/${article._id}`}>Details</Link>
-                </button>
+                <Link to={`/articleDetails/${article._id}`}>
+                  <button
+                    onClick={() => handleViewCount(article._id)}
+                    className="mt-4 py-1 px-6 bg-rose-600 text-rose-100 rounded-sm"
+                  >
+                    Details
+                  </button>
+                </Link>
               </div>
             </div>
           ))}

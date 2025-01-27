@@ -34,9 +34,10 @@ const AddArticle = () => {
       return res.data;
     },
   });
-
+  const postedDate = new Date().toISOString().split("T")[0];
+  // console.log(postedDate);
   const [selectedOption, setSelectedOption] = useState(null);
-  console.log(selectedOption);
+  // console.log(selectedOption);
   const {
     register,
     handleSubmit,
@@ -66,29 +67,50 @@ const AddArticle = () => {
         description: data.description,
         email: user?.email,
         name: user?.displayName,
+        photo: user?.photoURL,
+        postedDate: postedDate,
         status: "pending",
         isPremium: "no",
         viewCount: 0,
       };
 
-      const PublisherRes = await axiosSecure.post("/articles", articles);
-      console.log(PublisherRes.data);
-      if (PublisherRes.data.insertedId) {
-        reset();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Addeed New Articles",
-          showConfirmButton: false,
-
-          timer: 1500,
+      axiosSecure
+        .post("/articles", { article: articles, email: user.email })
+        .then((response) => {
+          const PublisherRes = response.data;
+          console.log(PublisherRes);
+          if (PublisherRes.result?.insertedId) {
+            Swal.fire({
+              icon: "success",
+              title: "Success!",
+              text: "Your article has been published successfully.",
+              confirmButtonText: "OK",
+            });
+          } else if (PublisherRes.error) {
+            Swal.fire({
+              position: "top-center",
+              icon: "error",
+              title: "Failed to Add Article",
+              text: PublisherRes.error,
+              showConfirmButton: true,
+            });
+          } else {
+            Swal.fire({
+              position: "top-center",
+              icon: "warning",
+              title: "Something went wrong!",
+              text: "Unable to add article. Please try again later.",
+              showConfirmButton: true,
+            });
+          }
+        })
+        .finally(() => {
+          console.log("Request completed.");
         });
-      }
     }
-
-    // console.log("articles", articles);
-    // alert("Article submitted successfully!");
+    // H--------------------------------------------
   };
+
   return (
     <div className="flex justify-center items-center py-10 md:px-0 px-3   bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">

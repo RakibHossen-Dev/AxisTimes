@@ -172,8 +172,12 @@ const AllArticles = () => {
           <thead className="  text-xs uppercase">
             <tr>
               <th scope="col" className="px-6 py-4">
+                Author
+              </th>
+              <th scope="col" className="px-6 py-4">
                 Details
               </th>
+
               <th scope="col" className="px-6 py-4">
                 Actions
               </th>
@@ -186,6 +190,17 @@ const AllArticles = () => {
                 className="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-900 border-b dark:border-gray-700"
               >
                 {/* Details Column */}
+
+                <td className="px-6 py-4">
+                  <img
+                    src={article?.photo}
+                    alt="Article"
+                    className="w-10 h-100 md:w-16 md:h-16 rounded-lg shadow-md"
+                  />
+                  <p className="text-md font-medium text-gray-800 dark:text-white">
+                    Author: {article.name}
+                  </p>
+                </td>
                 <td className="px-6 py-4">
                   <div className="flex md:flex-row flex-col items-center space-x-4">
                     {/* Image */}
@@ -198,9 +213,7 @@ const AllArticles = () => {
                       <h3 className="text-lg font-medium text-gray-800 dark:text-white">
                         {article.title}
                       </h3>
-                      <p className="text-md font-medium text-gray-800 dark:text-white">
-                        Author: {article.name}
-                      </p>
+
                       <p className="text-xs text-gray-600 dark:text-gray-400">
                         <span className="font-medium">Publisher:</span>{" "}
                         {article.publisher}
@@ -208,6 +221,10 @@ const AllArticles = () => {
                       <p className="text-xs text-gray-600 dark:text-gray-400 hidden lg:block">
                         <span className="font-medium">Email:</span>{" "}
                         {article.email}
+                      </p>
+                      <p className="text-xs text-gray-600 dark:text-gray-400 hidden lg:block">
+                        <span className="font-medium">Poted Date:</span>{" "}
+                        {article.postedDate}
                       </p>
                       {/* <span
                         className={`inline-block mt-2 px-3 py-1 text-xs font-medium rounded-full ${
