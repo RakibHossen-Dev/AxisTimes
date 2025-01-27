@@ -3,10 +3,12 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Articles = () => {
+  const { user } = useContext(AuthContext);
   const [selectedPublisher, setSelectedPublisher] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
   const [search, setSearch] = useState("");
@@ -20,7 +22,16 @@ const Articles = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
 
-  
+  const { data: userType = [] } = useQuery({
+    queryKey: ["userType", user?.email],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/userType/${user?.email}`);
+      console.log(res);
+      return res.data;
+    },
+  });
+  console.log(userType);
+
   console.log(selectedTag);
   const { data: articles = [], refetch } = useQuery({
     queryKey: ["articles", search, selectedPublisher, selectedTag],
@@ -60,6 +71,7 @@ const Articles = () => {
       refetch();
     });
   };
+
   return (
     <div className="w-11/12 mx-auto my-10">
       <div className="grid grid-cols-3 gap-5 items-center justify-between md:mb-12 mb-5">
@@ -168,14 +180,24 @@ const Articles = () => {
                   {article.description?.slice(0, 100)}...
                 </p>
 
-                <Link to={`/articleDetails/${article._id}`}>
+                {article.isPremium === "yes" &&
+                userType.premiumTaken === null ? (
                   <button
                     onClick={() => handleViewCount(article._id)}
-                    className="mt-4 py-1 px-6 bg-rose-600 text-rose-100 rounded-sm"
+                    className="mt-4 py-1 px-6 cursor-not-allowed  bg-rose-400  text-rose-100 rounded-sm"
                   >
                     Details
                   </button>
-                </Link>
+                ) : (
+                  <Link to={`/articleDetails/${article._id}`}>
+                    <button
+                      onClick={() => handleViewCount(article._id)}
+                      className="mt-4 py-1 px-6 bg-rose-600 text-rose-100 rounded-sm"
+                    >
+                      Details
+                    </button>
+                  </Link>
+                )}
               </div>
             </div>
           ))}

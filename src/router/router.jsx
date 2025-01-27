@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:9000/article/${params.id}`),
+          fetch(`https://axistimes-server.vercel.app/article/${params.id}`),
       },
       {
         path: "/myArticles",

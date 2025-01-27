@@ -139,7 +139,9 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      // localStorage.setItem("email", currentUser?.email);
       setUser(currentUser);
+      // console.log(currentUser);
       setLoading(true);
       if (currentUser) {
         const userInfo = { email: currentUser.email };
@@ -181,11 +183,13 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem("access-token");
       }
       console.log("Current User", currentUser);
+      // localStorage.setItem("email", currentUser?.email);
+
       setLoading(false);
     });
 
     return () => {
-      unsubscribe();
+      return unsubscribe();
     };
   }, [axiosPublic]);
 

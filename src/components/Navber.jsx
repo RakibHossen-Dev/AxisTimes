@@ -5,10 +5,24 @@ import { useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import axisTimes from "../assets/axistimes.png";
 import { AuthContext } from "../providers/AuthProvider";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
+import useAdmin from "../hooks/useAdmin";
 const Navber = () => {
+  const [isAdmin] = useAdmin();
+
   const { user } = useContext(AuthContext);
   const sideMenuRef = useRef();
+  const axiosPublic = useAxiosPublic();
 
+  const { data: userType = [] } = useQuery({
+    queryKey: ["userType", user?.email],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/userType/${user?.email}`);
+      return res.data;
+    },
+  });
+  // console.log(userType);
   const openMenu = () => {
     sideMenuRef.current.style.transform = "translateX(-16rem)";
   };
@@ -28,24 +42,34 @@ const Navber = () => {
             <li>
               <Link to="/">Home</Link>
             </li>
-            <li>
-              <Link to="/AddArticle">Add Articles</Link>
-            </li>
+
             <li>
               <Link to="/articles">All Articles</Link>
             </li>
-            <li>
-              <Link to="/subscription">Subscription</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/adminHome">Dashboard </Link>
-            </li>
-            <li>
-              <Link to="/myArticles">My Articles</Link>
-            </li>
-            <li>
-              <Link to="/premiumArticles">Premium Articles</Link>
-            </li>
+
+            {user && (
+              <>
+                <li>
+                  <Link to="/AddArticle">Add Articles</Link>
+                </li>
+                <li>
+                  <Link to="/subscription">Subscription</Link>
+                </li>
+                {isAdmin === true && (
+                  <li>
+                    <Link to="/dashboard/adminHome">Dashboard </Link>
+                  </li>
+                )}
+                <li>
+                  <Link to="/myArticles">My Articles</Link>
+                </li>
+                {userType.premiumTaken !== null && (
+                  <li>
+                    <Link to="/premiumArticles">Premium Articles</Link>
+                  </li>
+                )}
+              </>
+            )}
           </ul>
         </div>
         <div className="flex justify-between items-center gap-3 md:gap-5">
@@ -89,33 +113,44 @@ const Navber = () => {
             <li>
               <Link to="/">Home</Link>
             </li>
-            <li>
-              <Link to="/AddArticle">Add Articles</Link>
-            </li>
+
             <li>
               <Link to="/articles">All Articles</Link>
             </li>
 
-            <li>
-              <Link to="/subscription">Subscription</Link>
-            </li>
-            <li>
-              <Link to="/dashboard/adminHome">Dashboard </Link>
-            </li>
-            <li>
-              <Link to="/myArticles">My Articles</Link>
-            </li>
-            <li>
-              <Link to="/premiumArticles">Premium Articles</Link>
-            </li>
-            <li className="flex items-center gap-3 w-full">
-              <button className="py-1 px-4 border w-full hover:bg-black hover:text-white border-black text-black transition ease-linear duration-200">
-                <Link to="/login">Login</Link>
-              </button>
-              <button className="py-1 px-4 border w-full hover:bg-rose-600 hover:border-rose-600  hover:text-white border-black text-black transition ease-linear duration-200">
-                <Link to="/register">Register</Link>
-              </button>
-            </li>
+            {user && (
+              <>
+                <li>
+                  <Link to="/AddArticle">Add Articles</Link>
+                </li>
+                <li>
+                  <Link to="/subscription">Subscription</Link>
+                </li>
+                {isAdmin === true && (
+                  <li>
+                    <Link to="/dashboard/adminHome">Dashboard </Link>
+                  </li>
+                )}
+                <li>
+                  <Link to="/myArticles">My Articles</Link>
+                </li>
+                {userType.premiumTaken !== null && (
+                  <li>
+                    <Link to="/premiumArticles">Premium Articles</Link>
+                  </li>
+                )}
+              </>
+            )}
+            {!user && (
+              <li className="flex items-center gap-3 w-full">
+                <button className="py-1 px-4 border w-full hover:bg-black hover:text-white border-black text-black transition ease-linear duration-200">
+                  <Link to="/login">Login</Link>
+                </button>
+                <button className="py-1 px-4 border w-full hover:bg-rose-600 hover:border-rose-600  hover:text-white border-black text-black transition ease-linear duration-200">
+                  <Link to="/register">Register</Link>
+                </button>
+              </li>
+            )}
           </ul>
         </div>
       </nav>
