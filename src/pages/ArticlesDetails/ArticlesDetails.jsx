@@ -54,7 +54,7 @@ const ArticlesDetails = () => {
                 key={index}
                 className="bg-blue-100 text-blue-600 text-sm font-medium px-3 py-1 rounded-full"
               >
-                {t.value}
+                {t}
               </span>
             ))}
           </div>

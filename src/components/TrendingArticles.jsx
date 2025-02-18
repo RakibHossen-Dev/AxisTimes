@@ -25,7 +25,7 @@ const TrendingArticles = () => {
   return (
     <div className="w-11/12 mx-auto my-16">
       <div className="relative w-fit ">
-        <h2 className="md:text-4xl lg:text-5xl text-2xl font-extrabold text-gray-900 uppercase mb-2 border-b-4 border-black ">
+        <h2 className="md:text-4xl lg:text-5xl text-2xl font-extrabold text-gray-900 dark:text-white uppercase mb-2 border-b-4 border-black dark:border-white ">
           Trending <span className="text-rose-600 ">Articles</span>
         </h2>
         <div className="absolute bottom-0 left-0 w-1/2 h-1 bg-red-600"></div>
@@ -51,7 +51,7 @@ const TrendingArticles = () => {
       >
         {tendingRrticles.map((article) => (
           <SwiperSlide key={article._id}>
-            <div className="relative rounded overflow-hidden border bg-white m-4 lg:h-[430px]  h-[450px]">
+            <div className="relative rounded overflow-hidden dark:bg-black border dark:border-gray-700 bg-white m-4 lg:h-[430px]  h-[450px]">
               <p className="bg-rose-600 text-white py-1 px-3 absolute top-2 right-2 rounded-md text-center w-24">
                 {article.viewCount} Views
               </p>
@@ -66,14 +66,14 @@ const TrendingArticles = () => {
                   {article.category}
                 </div>
                 {/* Title */}
-                <h2 className="font-bold text-lg mb-2 text-gray-900 hover:text-rose-500 ">
+                <h2 className="font-bold text-lg mb-2 dark:text-white text-gray-900 hover:text-rose-500 ">
                   {article.title}
                 </h2>
-                <h4 className="font-semibold text-md mb-2 text-gray-900  cursor-pointer">
+                <h4 className="font-semibold text-md mb-2 text-gray-900 dark:text-gray-400  cursor-pointer">
                   Publisher: {article.publisher}
                 </h4>
 
-                <p className="text-gray-700 text-base">
+                <p className="text-gray-700 text-base dark:text-gray-400">
                   {article.description?.slice(0, 80)}...
                 </p>
 

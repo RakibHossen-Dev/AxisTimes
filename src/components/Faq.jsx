@@ -6,7 +6,7 @@ const Faq = () => {
       {/* Faq
        */}
       <div className="relative w-fit ">
-        <h2 className="md:text-4xl lg:text-5xl text-2xl font-extrabold text-gray-900 uppercase mb-2 border-b-4 border-black ">
+        <h2 className="md:text-4xl lg:text-5xl text-2xl font-extrabold text-gray-900 dark:text-white dark:border-white uppercase mb-2 border-b-4 border-black ">
           FA<span className="text-rose-600 ">Q</span>
         </h2>
         <div className="absolute bottom-0 left-0 w-1/2 h-1 bg-red-600"></div>

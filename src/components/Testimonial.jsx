@@ -21,9 +21,9 @@ const Testimonial = () => {
   };
 
   return (
-    <div className="w-11/12 mx-auto my-16  pb-10">
+    <div className="w-11/12 mx-auto py-16  pb-10">
       <div className="relative w-fit ">
-        <h2 className="md:text-4xl lg:text-5xl text-2xl font-extrabold text-gray-900 uppercase mb-2 border-b-4 border-black ">
+        <h2 className="md:text-4xl lg:text-5xl text-2xl font-extrabold text-gray-900 dark:text-white dark:border-white uppercase mb-2 border-b-4 border-black ">
           What <span className="text-rose-600 ">People Say</span>
         </h2>
         <div className="absolute bottom-0 left-0 w-1/2 h-1 bg-red-600"></div>
@@ -40,7 +40,7 @@ const Testimonial = () => {
             ref={slider}
             className="flex   gap-5 md:w-[200%] w-[400%] transition-transform duration-300 ease-in-out"
           >
-            <li className="w-1/4 border ">
+            <li className="w-1/4 border dark:border-gray-700">
               <div className="shadow-custom  lg:p-14 p-6 rounded-sm space-y-5">
                 <div className="flex md:flex-row flex-col items-center gap-2">
                   <img
@@ -53,10 +53,10 @@ const Testimonial = () => {
                     <h3 className="text-xl font-semibold text-rose-600">
                       John Doe
                     </h3>
-                    <p>TechGuru, UK</p>
+                    <p className="dark:text-white">TechGuru, UK</p>
                   </div>
                 </div>
-                <p>
+                <p className="dark:text-gray-200">
                   I’ve been using this newspaper website for a while now, and
                   I’m impressed by how quickly they update their articles. The
                   coverage is comprehensive, and I never miss any important
@@ -64,7 +64,7 @@ const Testimonial = () => {
                 </p>
               </div>
             </li>
-            <li className="w-1/4 border">
+            <li className="w-1/4 border dark:border-gray-700">
               <div className="shadow-custom  lg:p-14 p-6 rounded-sm space-y-5">
                 <div className="flex md:flex-row flex-col items-center gap-2">
                   <img
@@ -77,17 +77,17 @@ const Testimonial = () => {
                     <h3 className="text-xl font-semibold text-rose-600">
                       Maria Lopez
                     </h3>
-                    <p>DevTech, Canada</p>
+                    <p className="dark:text-white">DevTech, Canada</p>
                   </div>
                 </div>
-                <p>
+                <p className="dark:text-gray-200">
                   The layout is clean and easy to navigate. Whether I’m
                   searching for the latest sports news or tech updates, I can
                   find everything in just a few clicks. Highly recommend!
                 </p>
               </div>
             </li>
-            <li className="w-1/4 border">
+            <li className="w-1/4 border dark:border-gray-700">
               <div className="shadow-custom lg:p-14 p-6 rounded-sm space-y-5">
                 <div className="flex md:flex-row flex-col items-center gap-2">
                   <img
@@ -100,17 +100,17 @@ const Testimonial = () => {
                     <h3 className="text-xl font-semibold text-rose-600">
                       Rahul Sen
                     </h3>
-                    <p>Innovate IT, India</p>
+                    <p className="dark:text-white">Innovate IT, India</p>
                   </div>
                 </div>
-                <p>
+                <p className="dark:text-gray-200">
                   This website doesn’t just report the news—it explains it! The
                   in-depth articles and editorials provide valuable insights
                   that I don’t find elsewhere.
                 </p>
               </div>
             </li>
-            <li className="w-1/4 border">
+            <li className="w-1/4 border dark:border-gray-700">
               <div className="shadow-custom lg:p-14 p-6 rounded-sm space-y-5">
                 <div className="flex md:flex-row flex-col items-center gap-2">
                   <img
@@ -123,10 +123,10 @@ const Testimonial = () => {
                     <h3 className="text-xl font-semibold text-rose-600">
                       Ayesha Rahman
                     </h3>
-                    <p>Innovate IT, India</p>
+                    <p className="dark:text-white">Innovate IT, India</p>
                   </div>
                 </div>
-                <p>
+                <p className="dark:text-gray-200">
                   I love how mobile-friendly the website is! I can catch up on
                   the news during my commute without any hassle. The app
                   integration is a bonus too.

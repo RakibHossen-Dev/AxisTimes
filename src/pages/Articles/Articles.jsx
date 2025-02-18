@@ -73,7 +73,7 @@ const Articles = () => {
   };
 
   return (
-    <div className="w-11/12 mx-auto my-10">
+    <div className="w-11/12 mx-auto py-10">
       <div className="grid lg:grid-cols-3 grid-cols-1 gap-5 items-center justify-between md:mb-12 mb-5">
         <div>
           {/* Publisher dropdown */}
@@ -151,8 +151,10 @@ const Articles = () => {
           .filter((article) => article.status === "approve")
           .map((article) => (
             <div
-              className={`relative rounded overflow-hidden shadow-lg  ${
-                article.isPremium === "no" ? "bg-white" : " bg-rose-100"
+              className={`relative rounded overflow-hidden shadow-lg dark:border dark:border-gray-700  ${
+                article.isPremium === "no"
+                  ? "bg-white dark:bg-black"
+                  : " bg-rose-100"
               } `}
             >
               <p className="bg-rose-600 text-white py-1 px-3 absolute top-2 right-2 rounded-md text-center w-24">
@@ -169,14 +171,14 @@ const Articles = () => {
                   {article.category}
                 </div>
                 {/* Title */}
-                <h2 className="font-bold text-lg mb-2 text-gray-900 hover:text-rose-500 cursor-pointer">
+                <h2 className="font-bold dark:text-white text-lg mb-2 text-gray-900 hover:text-rose-500 cursor-pointer">
                   {article.title}
                 </h2>
-                <h4 className="font-semibold text-md mb-2 text-gray-900  cursor-pointer">
+                <h4 className="font-semibold text-md mb-2 text-gray-900 dark:text-gray-300  cursor-pointer">
                   Publisher: {article.publisher}
                 </h4>
 
-                <p className="text-gray-700 text-base">
+                <p className="text-gray-700 text-base dark:text-gray-300">
                   {article.description?.slice(0, 100)}...
                 </p>
 

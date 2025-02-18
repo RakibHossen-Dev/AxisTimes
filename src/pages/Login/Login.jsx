@@ -53,7 +53,7 @@ const Login = () => {
   };
   return (
     <div>
-      <div className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="flex justify-center items-center h-screen bg-gray-100 dark:bg-black">
         <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
           <div className="flex items-center gap-3 mb-5">
             <button

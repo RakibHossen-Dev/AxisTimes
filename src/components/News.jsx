@@ -14,9 +14,9 @@ const News = () => {
   console.log(newses);
 
   return (
-    <div className="w-11/12 mx-auto my-10">
+    <div className="w-11/12 mx-auto py-10">
       <div className="relative w-fit mb-8">
-        <h2 className="md:text-4xl lg:text-5xl text-2xl font-extrabold text-gray-900 uppercase mb-2 border-b-4 border-black ">
+        <h2 className="md:text-4xl lg:text-5xl text-2xl font-extrabold  dark:text-white text-gray-900 uppercase mb-2 border-b-4 border-black dark:border-white">
           Letest <span className="text-rose-600 ">Articles</span>
         </h2>
         <div className="absolute bottom-0 left-0 w-1/2 h-1 bg-red-600"></div>
@@ -29,12 +29,12 @@ const News = () => {
               alt={newses[0].title}
               className="w-full h-[300px] object-cover "
             />
-            <h2 className="text-xl font-bold mt-4 hover:underline">
+            <h2 className="text-xl font-bold mt-4 hover:underline dark:text-white">
               <Link to={`/articleDetails/${newses[0]._id}`}>
                 {newses[0].title}
               </Link>
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-400">
               {newses[0].description.slice(0, 350)}...
             </p>
           </div>
@@ -49,12 +49,12 @@ const News = () => {
                     className="w-full h-32 object-cover "
                   />
                   <div>
-                    <h3 className="text-md font-semibold  hover:underline">
+                    <h3 className="text-md font-semibold dark:text-white  hover:underline">
                       <Link to={`/articleDetails/${news._id}`}>
                         {news.title}
                       </Link>
                     </h3>
-                    <h3 className="text-gray-600">
+                    <h3 className="text-gray-600 dark:text-gray-400">
                       {news.description.slice(0, 50)}...
                     </h3>
                   </div>

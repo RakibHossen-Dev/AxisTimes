@@ -112,8 +112,8 @@ const AddArticle = () => {
   };
 
   return (
-    <div className="flex justify-center items-center py-10 md:px-0 px-3   bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-2xl">
+    <div className="flex justify-center items-center py-10 md:px-0 px-3 dark:bg-black  bg-gray-100">
+      <div className="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg w-full max-w-2xl">
         <h2 className="text-2xl font-bold text-center text-gray-700 mb-6">
           Add Article
         </h2>

@@ -53,7 +53,7 @@ const MyArticles = () => {
   };
   return (
     <div className="w-11/12 mx-auto">
-      <h2 className="my-8 font-semibold text-rose-600 text-3xl text-center">
+      <h2 className="py-8 font-semibold text-rose-600 text-3xl text-center">
         My Articles
       </h2>
 
