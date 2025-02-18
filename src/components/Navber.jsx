@@ -8,6 +8,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import useAdmin from "../hooks/useAdmin";
+import { FaSearch } from "react-icons/fa";
 const Navber = () => {
   const [isAdmin] = useAdmin();
 
@@ -29,9 +30,98 @@ const Navber = () => {
   const closeMenu = () => {
     sideMenuRef.current.style.transform = "translateX(16rem)";
   };
+
+  const getFormattedDate = () => {
+    const options = {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    };
+    return new Date().toLocaleDateString("en-US", options);
+  };
   return (
     <div className="bg-rose-600">
-      <nav className="flex justify-between items-center border-b  py-3 px-4  md:px-10">
+      <nav className="pt-4 hidden lg:block">
+        <div className="flex justify-between items-center w-11/12 mx-auto mb-5">
+          <Link to="/articles">
+            <div className="text-white flex items-center gap-1">
+              <FaSearch className="text-white text-lg"></FaSearch>Search
+            </div>
+          </Link>
+          <div>
+            <Link to="/">
+              <img src={axisTimes} className="md:w-64 w-48" alt="" />
+            </Link>
+          </div>
+          <div>
+            <p className="text-white">{getFormattedDate()}</p>
+          </div>
+        </div>
+        <div className=" bg-black py-4 ">
+          <div className="w-11/12 mx-auto flex justify-between items-center">
+            <ul className="lg:flex  items-center text-white gap-4  ">
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+
+              <li>
+                <Link to="/articles">All Articles</Link>
+              </li>
+
+              {user && (
+                <>
+                  <li>
+                    <Link to="/AddArticle">Add Articles</Link>
+                  </li>
+                  <li>
+                    <Link to="/subscription">Subscription</Link>
+                  </li>
+                  {isAdmin === true && (
+                    <li>
+                      <Link to="/dashboard/adminHome">Dashboard </Link>
+                    </li>
+                  )}
+                  <li>
+                    <Link to="/myArticles">My Articles</Link>
+                  </li>
+                  {userType.premiumTaken !== null && (
+                    <li>
+                      <Link to="/premiumArticles">Premium Articles</Link>
+                    </li>
+                  )}
+                </>
+              )}
+            </ul>
+            <div className="flex justify-between items-center gap-3 md:gap-5">
+              {user ? (
+                <Link to="/myProfile">
+                  {user?.photoURL && (
+                    <div className="border-2 rounded-badge">
+                      <img
+                        className="w-12 h-12 rounded-badge object-cover"
+                        src={user?.photoURL}
+                        alt=""
+                      />
+                    </div>
+                  )}
+                </Link>
+              ) : (
+                <>
+                  <button className=" lg:block hidden py-2 px-6 border  hover:bg-black  text-white border-white  transition ease-linear duration-200">
+                    <Link to="/login">Login</Link>
+                  </button>
+                  <button className="lg:block hidden  py-2 px-8 border hover:bg-transparent bg-rose-600 hover:border-white text-white border-black  transition ease-linear duration-200">
+                    <Link to="/register">Register</Link>
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <nav className="flex justify-between items-center border-b  py-3 px-4  md:px-10 lg:hidden">
         <div>
           <Link to="/">
             <img src={axisTimes} className="md:w-60 w-48" alt="" />
@@ -72,6 +162,7 @@ const Navber = () => {
             )}
           </ul>
         </div>
+
         <div className="flex justify-between items-center gap-3 md:gap-5">
           {user ? (
             <Link to="/myProfile">

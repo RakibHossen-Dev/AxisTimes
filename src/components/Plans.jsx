@@ -15,12 +15,15 @@ const Plans = () => {
 
   // console.log(subscriptions);
   return (
-    <div className=" w-11/12 mx-auto">
-      <h2 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-pink-400 mb-8">
-        Subscription Plans
-      </h2>
+    <div className="w-11/12 mx-auto my-10">
+      <div className="relative w-fit ">
+        <h2 className="md:text-4xl lg:text-5xl text-2xl font-extrabold text-gray-900 uppercase mb-2 border-b-4 border-black ">
+          Subscription <span className="text-rose-600 ">Plans</span>
+        </h2>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1 bg-red-600"></div>
+      </div>
 
-      <div className="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 items-center justify-center gap-10 mb-10">
+      <div className="mt-8 grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 items-center justify-center gap-10 mb-10">
         <div className=" p-8 bg-gradient-to-r from-blue-600 to-blue-400 rounded-lg shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-4xl relative">
           <div className="absolute top-6 left-6 bg-gradient-to-r from-blue-700 to-blue-500 text-white py-2 px-6 rounded-full text-lg font-bold shadow-lg">
             Basic

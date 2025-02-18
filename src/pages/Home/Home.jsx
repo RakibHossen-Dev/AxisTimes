@@ -1,5 +1,6 @@
 import Faq from "../../components/Faq";
 import Modals from "../../components/Modals";
+import MostRead from "../../components/MostRead";
 import News from "../../components/News";
 import Plans from "../../components/Plans";
 import Publisher from "../../components/Publisher";
@@ -14,6 +15,7 @@ const Home = () => {
       <News></News>
       <TrendingArticles></TrendingArticles>
       <UserCounter></UserCounter>
+      <MostRead></MostRead>
       <Faq></Faq>
       <Publisher></Publisher>
       <Plans></Plans>

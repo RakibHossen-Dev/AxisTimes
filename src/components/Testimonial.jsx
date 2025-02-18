@@ -22,9 +22,12 @@ const Testimonial = () => {
 
   return (
     <div className="w-11/12 mx-auto my-16  pb-10">
-      <h2 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-pink-400 mb-8">
-        What People Say
-      </h2>
+      <div className="relative w-fit ">
+        <h2 className="md:text-4xl lg:text-5xl text-2xl font-extrabold text-gray-900 uppercase mb-2 border-b-4 border-black ">
+          What <span className="text-rose-600 ">People Say</span>
+        </h2>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1 bg-red-600"></div>
+      </div>
       <div className="my-8 mx-auto py-0 md:px-20 px-10 relative">
         <button onClick={sildeForward}>
           <MdArrowForward className="text-white text-3xl p-1 lg:text-5xl bg-rose-600 rounded-full md:p-2 absolute top-1/2 right-0 -translate-y-1/2" />

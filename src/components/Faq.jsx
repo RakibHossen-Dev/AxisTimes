@@ -2,12 +2,15 @@ import { Accordion } from "flowbite-react";
 
 const Faq = () => {
   return (
-    <div className="w-11/12 mx-auto md:w-9/12 lg:w-3/5 my-14">
+    <div className="w-11/12 mx-auto   my-14">
       {/* Faq
        */}
-      <h2 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-pink-400 mb-8">
-        FAQ
-      </h2>
+      <div className="relative w-fit ">
+        <h2 className="md:text-4xl lg:text-5xl text-2xl font-extrabold text-gray-900 uppercase mb-2 border-b-4 border-black ">
+          FA<span className="text-rose-600 ">Q</span>
+        </h2>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1 bg-red-600"></div>
+      </div>
 
       <Accordion>
         {/* FAQ Question 1 */}

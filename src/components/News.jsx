@@ -17,7 +17,6 @@ const News = () => {
     <div className="w-11/12 mx-auto my-10">
       {newses.length > 0 && (
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-6">
-          {/* বড় নিউজ ব্লক (বামদিকে) */}
           <div className="">
             <img
               src={newses[0].image}
@@ -34,7 +33,6 @@ const News = () => {
             </p>
           </div>
 
-          {/* ছোট নিউজ ব্লক (ডানদিকে) */}
           <div className="">
             <div className="grid grid-cols-2 gap-4">
               {newses.slice(1, 5).map((news) => (

@@ -74,7 +74,7 @@ const Articles = () => {
 
   return (
     <div className="w-11/12 mx-auto my-10">
-      <div className="grid grid-cols-3 gap-5 items-center justify-between md:mb-12 mb-5">
+      <div className="grid lg:grid-cols-3 grid-cols-1 gap-5 items-center justify-between md:mb-12 mb-5">
         <div>
           {/* Publisher dropdown */}
           <select
