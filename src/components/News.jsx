@@ -15,6 +15,12 @@ const News = () => {
 
   return (
     <div className="w-11/12 mx-auto my-10">
+      <div className="relative w-fit mb-8">
+        <h2 className="md:text-4xl lg:text-5xl text-2xl font-extrabold text-gray-900 uppercase mb-2 border-b-4 border-black ">
+          Letest <span className="text-rose-600 ">Articles</span>
+        </h2>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1 bg-red-600"></div>
+      </div>
       {newses.length > 0 && (
         <div className="grid lg:grid-cols-2 grid-cols-1 gap-6">
           <div className="">

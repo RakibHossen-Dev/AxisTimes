@@ -19,6 +19,7 @@ import UpdateMyArticle from "../pages/UpdateMyArticle/UpdateMyArticle";
 import PremiumArticles from "../pages/PremiumArticles/PremiumArticles";
 import Subscription from "../pages/Subscription/Subscription";
 import Payment from "../pages/Payment/Payment";
+import About from "../pages/About";
 
 export const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ export const router = createBrowserRouter([
       {
         path: "/articles",
         element: <Articles></Articles>,
+      },
+      {
+        path: "/about",
+        element: <About></About>,
       },
       {
         path: "/articleDetails/:id",

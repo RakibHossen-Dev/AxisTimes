@@ -68,6 +68,9 @@ const Navber = () => {
               <li>
                 <Link to="/articles">All Articles</Link>
               </li>
+              <li>
+                <Link to="/about">About Us</Link>
+              </li>
 
               {user && (
                 <>
