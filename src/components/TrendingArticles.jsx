@@ -25,7 +25,7 @@ const TrendingArticles = () => {
   return (
     <div className="w-11/12 mx-auto my-10">
       <h2 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-pink-400 mb-8">
-        Tending Rrticles
+        Tending Articles
       </h2>
       <Swiper
         watchSlidesProgress={true}

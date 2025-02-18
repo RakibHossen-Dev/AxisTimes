@@ -1,5 +1,6 @@
 import Faq from "../../components/Faq";
 import Modals from "../../components/Modals";
+import News from "../../components/News";
 import Plans from "../../components/Plans";
 import Publisher from "../../components/Publisher";
 import Testimonial from "../../components/Testimonial";
@@ -10,6 +11,7 @@ const Home = () => {
   return (
     <div>
       <Modals></Modals>
+      <News></News>
       <TrendingArticles></TrendingArticles>
       <UserCounter></UserCounter>
       <Faq></Faq>

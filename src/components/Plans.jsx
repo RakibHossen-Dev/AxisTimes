@@ -21,7 +21,7 @@ const Plans = () => {
       </h2>
 
       <div className="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 items-center justify-center gap-10 mb-10">
-        <div className=" p-8 bg-gradient-to-r from-blue-600 to-blue-400 rounded-3xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-4xl relative">
+        <div className=" p-8 bg-gradient-to-r from-blue-600 to-blue-400 rounded-lg shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-4xl relative">
           <div className="absolute top-6 left-6 bg-gradient-to-r from-blue-700 to-blue-500 text-white py-2 px-6 rounded-full text-lg font-bold shadow-lg">
             Basic
           </div>
@@ -39,7 +39,7 @@ const Plans = () => {
           </button>
         </div>
 
-        <div className="p-8 bg-gradient-to-r from-green-500 to-green-600 rounded-3xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-4xl relative">
+        <div className="p-8 bg-gradient-to-r from-green-500 to-green-600 rounded-lg shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-4xl relative">
           <div className="absolute top-6 left-6 bg-gradient-to-r from-green-600 to-green-500 text-white py-2 px-6 rounded-full text-lg font-bold shadow-lg">
             Premium
           </div>
@@ -57,7 +57,7 @@ const Plans = () => {
           </button>
         </div>
 
-        <div className=" p-8 bg-gradient-to-r from-rose-500 to-rose-700 rounded-3xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-4xl relative">
+        <div className=" p-8 bg-gradient-to-r from-rose-500 to-rose-700 rounded-lg shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-4xl relative">
           <div className="absolute top-6 left-6 bg-gradient-to-r from-rose-600 to-rose-500 text-white py-2 px-6 rounded-full text-lg font-bold shadow-lg">
             Premium
           </div>
