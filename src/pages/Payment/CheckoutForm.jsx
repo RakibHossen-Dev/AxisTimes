@@ -109,57 +109,59 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-white text-gray-900 rounded-lg shadow-2xl p-8 mt-20">
-      <form onSubmit={handleSubmit}>
-        <label className="block mb-2 font-medium text-gray-700">
-          Select Plan
-        </label>
-        <select
-          value={plan}
-          onChange={(e) => setPlan(e.target.value)}
-          className="w-full mb-4 p-2 border border-gray-300 rounded"
-          required
-        >
-          <option value="" disabled>
-            -- Choose Plan --
-          </option>
-          <option value="1min">1 Minute - $2.99</option>
-          <option value="5days">5 Days - $12.99</option>
-          <option value="10days">10 Days - $19.99</option>
-        </select>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="lg:w-[500px] w-[300px] mx-auto bg-white text-gray-900 rounded-lg shadow-2xl p-8 ">
+        <form onSubmit={handleSubmit}>
+          <label className="block mb-2 font-medium text-gray-700">
+            Select Plan
+          </label>
+          <select
+            value={plan}
+            onChange={(e) => setPlan(e.target.value)}
+            className="w-full mb-4 p-2 border border-gray-300 rounded"
+            required
+          >
+            <option value="" disabled>
+              -- Choose Plan --
+            </option>
+            <option value="1min">1 Minute - $2.99</option>
+            <option value="5days">5 Days - $12.99</option>
+            <option value="10days">10 Days - $19.99</option>
+          </select>
 
-        <label className="block mb-2 font-medium text-gray-700">
-          Card Details
-        </label>
-        <div className="border border-gray-300 rounded-md p-3">
-          <CardElement
-            options={{
-              style: {
-                base: {
-                  fontSize: "16px",
-                  color: "#424770",
-                  "::placeholder": {
-                    color: "#aab7c4",
+          <label className="block mb-2 font-medium text-gray-700">
+            Card Details
+          </label>
+          <div className="border border-gray-300 rounded-md p-3">
+            <CardElement
+              options={{
+                style: {
+                  base: {
+                    fontSize: "16px",
+                    color: "#424770",
+                    "::placeholder": {
+                      color: "#aab7c4",
+                    },
+                  },
+                  invalid: {
+                    color: "#9e2146",
                   },
                 },
-                invalid: {
-                  color: "#9e2146",
-                },
-              },
-            }}
-          />
-        </div>
-        {error && (
-          <p className="mt-2 mb-5 text-error text-center text-sm">{error}</p>
-        )}
+              }}
+            />
+          </div>
+          {error && (
+            <p className="mt-2 mb-5 text-error text-center text-sm">{error}</p>
+          )}
 
-        <button
-          type="submit"
-          className="w-full mt-5 bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 rounded-lg transition-all duration-300"
-        >
-          Pay Now
-        </button>
-      </form>
+          <button
+            type="submit"
+            className="w-full mt-5 bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 rounded-lg transition-all duration-300"
+          >
+            Pay Now
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
