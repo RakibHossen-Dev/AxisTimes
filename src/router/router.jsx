@@ -20,6 +20,7 @@ import PremiumArticles from "../pages/PremiumArticles/PremiumArticles";
 import Subscription from "../pages/Subscription/Subscription";
 import Payment from "../pages/Payment/Payment";
 import About from "../pages/About";
+import NotFound from "../pages/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,11 @@ export const router = createBrowserRouter([
         index: true,
         element: <Home></Home>,
       },
+      {
+        path: "*",
+        element: <NotFound></NotFound>,
+      },
+
       {
         path: "/myProfile",
         element: (

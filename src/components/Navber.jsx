@@ -70,8 +70,8 @@ const Navber = () => {
     return new Date().toLocaleDateString("en-US", options);
   };
   return (
-    <div className="bg-rose-600">
-      <nav className="pt-4 hidden lg:block">
+    <div className="bg-rose-600 relative">
+      <nav className="pt-4 hidden lg:block fixed top-0 left-0 w-full bg-rose-600 z-10">
         <div className="flex justify-between items-center w-11/12 mx-auto mb-5">
           <div className="flex gap-3 items-center">
             <div>
