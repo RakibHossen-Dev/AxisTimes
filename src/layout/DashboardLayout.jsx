@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-
+import { FaRegUser } from "react-icons/fa";
 const DashboardLayout = () => {
-  const { logOut } = useContext(AuthContext);
+  const { logOut, user } = useContext(AuthContext);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -16,19 +16,19 @@ const DashboardLayout = () => {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row min-h-screen ">
+    <div className="flex flex-col sm:flex-row min-h-screen dark:bg-black">
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 z-40 h-full w-64 bg-gray-50 text-gray-800 transition-transform ease-in-out duration-300 ${
+        className={`fixed top-0 left-0 z-40 h-full w-64 dark:bg-gray-900 dark:border-r dark:border-r-gray-700 dark:text-white bg-gray-50 text-gray-800 transition-transform ease-in-out duration-300 ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } sm:translate-x-0 rounded-tr-lg rounded-br-lg`}
+        } sm:translate-x-0`}
         aria-label="Sidebar"
       >
         <div className="h-full px-6 py-8 overflow-y-auto relative">
           {/* Close Button */}
           <button
             onClick={closeSidebar}
-            className="absolute top-4 right-4 text-black hover:text-red-500 sm:hidden"
+            className="absolute top-4 right-4 dark:text-white text-black hover:text-red-500 sm:hidden"
             aria-label="Close Sidebar"
           >
             <svg
@@ -54,7 +54,7 @@ const DashboardLayout = () => {
             <li>
               <Link
                 to="/dashboard/adminHome"
-                className="flex items-center p-2 text-gray-800 rounded-lg hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
+                className="flex items-center p-2 dark:text-white text-gray-800 rounded-lg hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
               >
                 {/* Home Icon */}
                 <svg
@@ -77,7 +77,7 @@ const DashboardLayout = () => {
             <li>
               <Link
                 to="/dashboard/allUsers"
-                className="flex items-center p-2 text-gray-800 rounded-lg hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
+                className="flex items-center p-2 dark:text-white text-gray-800 rounded-lg hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
               >
                 {/* Users Icon */}
                 <svg
@@ -100,7 +100,7 @@ const DashboardLayout = () => {
             <li>
               <Link
                 to="/dashboard/allArticles"
-                className="flex items-center p-2 text-gray-800 rounded-lg hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
+                className="flex items-center p-2 dark:text-white text-gray-800 rounded-lg hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
               >
                 {/* Articles Icon */}
                 <svg
@@ -123,7 +123,7 @@ const DashboardLayout = () => {
             <li>
               <Link
                 to="/dashboard/addPublisher"
-                className="flex items-center p-2 text-gray-800 rounded-lg hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
+                className="flex items-center p-2 dark:text-white text-gray-800 rounded-lg hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
               >
                 {/* Publisher Icon */}
                 <svg
@@ -143,11 +143,21 @@ const DashboardLayout = () => {
                 <span>Add Publisher</span>
               </Link>
             </li>
+            <li>
+              <Link
+                to="/dashboard/myProfile"
+                className="flex items-center p-2 dark:text-white text-gray-800 rounded-lg hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
+              >
+                {/* Publisher Icon */}
+                <FaRegUser className="mr-3" />
+                <span>My Profile</span>
+              </Link>
+            </li>
             <div className="border-b-2 border-rose-300"></div>
             <li>
               <Link
                 to="/"
-                className="flex items-center p-2 text-gray-800 rounded-lg hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
+                className="flex items-center p-2 dark:text-white text-gray-800 rounded-lg hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
               >
                 {/* Home Icon */}
                 <svg
@@ -171,7 +181,7 @@ const DashboardLayout = () => {
             {/* Logout Link */}
             <li
               onClick={logOut}
-              className="flex items-center p-2 cursor-pointer text-gray-800 rounded-lg hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
+              className="flex items-center p-2 cursor-pointer dark:text-white text-gray-800 rounded-lg hover:text-white hover:bg-rose-600 transition-colors ease-in-out duration-200"
             >
               {/* Logout Icon */}
               <svg
@@ -195,9 +205,9 @@ const DashboardLayout = () => {
       </aside>
 
       {/* Main Content */}
-      <div className="flex flex-col flex-1 ml-0 sm:ml-64 bg-white">
+      <div className="flex flex-col flex-1 ml-0 sm:ml-64 bg-white dark:bg-black">
         {/* Mobile Sidebar Toggle */}
-        <header className="flex items-center justify-between bg-white p-4 sm:hidden border-b">
+        <header className="flex items-center justify-between dark:bg-gray-800 bg-white p-4 sm:hidden border-b">
           <button
             onClick={toggleSidebar}
             className=" border p-2 rounded-badge border-rose-600 text-rose-600 transition-colors ease-in-out duration-300"
@@ -221,8 +231,22 @@ const DashboardLayout = () => {
         </header>
 
         {/* Content */}
-        <main className="p-8 sm:p-12">
-          <Outlet></Outlet>
+        <main className="relative">
+          <nav className="dark:bg-gray-900 lg:block hidden py-3 border-b dark:border-b-gray-700 px-10 z-10  fixed top-0 left-0 w-full">
+            <div className="flex items-center gap-2 justify-end">
+              <p className="dark:text-white text-black text-lg">
+                {user?.displayName}
+              </p>
+              <img
+                className="w-14 h-14 rounded-badge border-2 border-rose-600"
+                src={user?.photoURL}
+                alt=""
+              />
+            </div>
+          </nav>
+          <div className="p-8 sm:p-12 ">
+            <Outlet></Outlet>
+          </div>
         </main>
       </div>
     </div>

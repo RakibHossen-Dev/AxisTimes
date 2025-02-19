@@ -83,14 +83,14 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-gray-900 overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center  overflow-hidden z-0">
       <div
         className="absolute inset-0 bg-cover bg-center transform scale-110"
         style={{
           backgroundImage: `url("https://source.unsplash.com/1600x900/?luxury,abstract")`,
         }}
       ></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-80"></div>
+      {/* <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-80"></div> */}
 
       <div className="w-11/12 md:w-full mx-auto relative z-10 bg-white/10 backdrop-blur-lg border border-gray-200/30 shadow-2xl rounded-3xl p-10 max-w-md text-center transform hover:scale-105 transition-transform duration-500 ease-out">
         {user && (
@@ -103,18 +103,18 @@ const MyProfile = () => {
               />
               <span className="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></span>
             </div>
-            <h2 className="mt-4 text-4xl font-extrabold text-white">
+            <h2 className="mt-4 text-4xl font-extrabold dark:text-white">
               {name || "Your Name"}
             </h2>
           </>
         )}
-        <p className="text-gray-400 text-sm italic">
+        <p className=" dark:text-gray-300 text-sm italic">
           {user?.email || "Your Email"}
         </p>
         <p
           className={`mt-2 px-4 py-1 inline-block rounded-full text-sm font-semibold ${
             isAdmin
-              ? "text-yellow-300 bg-yellow-700/30"
+              ? "text-yellow-600 bg-yellow-700/30"
               : "text-blue-300 bg-blue-700/30"
           }`}
         >

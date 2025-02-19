@@ -48,7 +48,7 @@ const AdminHome = () => {
     ["UAE", 600],
   ];
   return (
-    <div>
+    <div className="lg:pt-16 dark:bg-black">
       <Chart
         chartType="PieChart"
         data={data}

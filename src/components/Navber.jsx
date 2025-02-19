@@ -12,7 +12,21 @@ import { FaMoon, FaSearch } from "react-icons/fa";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 const Navber = () => {
   const [isAdmin] = useAdmin();
-  const [theme, setTheme] = useState("light");
+  // const [theme, setTheme] = useState("light");
+
+  // useEffect(() => {
+  //   if (theme === "dark") {
+  //     document.documentElement.classList.add("dark");
+  //   } else {
+  //     document.documentElement.classList.remove("dark");
+  //   }
+  // }, [theme]);
+
+  // const handleThemeChange = () => {
+  //   setTheme(theme === "dark" ? "light" : "dark");
+  // };
+
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
     if (theme === "dark") {
@@ -20,6 +34,7 @@ const Navber = () => {
     } else {
       document.documentElement.classList.remove("dark");
     }
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   const handleThemeChange = () => {
@@ -209,7 +224,9 @@ const Navber = () => {
             <li>
               <Link to="/articles">All Articles</Link>
             </li>
-
+            <li>
+              <Link to="/about">About Us</Link>
+            </li>
             {user && (
               <>
                 <li>
